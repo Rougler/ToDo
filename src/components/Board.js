@@ -9,7 +9,7 @@ const Board = () => {
     { id: 3, title: 'Done', cards: [] },
     { id: 4, title: 'Staging', cards: [] },
   ];
-//   hello
+//   Namaste I am Rudraprasad Mohapatra
 
   return (
     <div className="board">
