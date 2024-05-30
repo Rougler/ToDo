@@ -1,5 +1,5 @@
-/* src/components/CardDetail.css
-
+/* src/components/CardDetail.css */
+ 
 .modal {
   position: fixed;
   z-index: 1;
@@ -11,7 +11,7 @@
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
-
+ 
 .modal-content {
   background-color: #3c3c3c;
   margin: 5% auto;
@@ -24,28 +24,28 @@
   flex-direction: row;
   justify-content: space-between;
 }
-
+ 
 .close {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
-
+ 
 .close:hover,
 .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
-
+ 
 .notifications,
 .description,
 .activity,
 .sidebar {
   margin: 10px 0;
 }
-
+ 
 .description textarea,
 .activity textarea {
   width: 100%;
@@ -56,27 +56,27 @@
   border-radius: 3px;
   margin-top: 10px;
 }
-
+ 
 .activity .comments {
   margin: 10px 0;
 }
-
+ 
 .comment {
   background-color: #2c2c2c;
   padding: 10px;
   border-radius: 3px;
   margin-bottom: 10px;
 }
-
+ 
 .comment-author {
   font-weight: bold;
   margin-right: 5px;
 }
-
+ 
 .sidebar {
   width: 200px;
 }
-
+ 
 .sidebar button {
   background-color: #0079bf;
   color: white;
@@ -88,65 +88,7 @@
   display: block;
   width: 100%;
 }
-
+ 
 .sidebar button:hover {
   background-color: #026aa7;
-} */
-/* .card-detail {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.card-detail-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  width: 300px;
-  max-width: 100%;
-}
-
-.card-detail-content button {
-  margin-top: 10px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background: #007bff;
-  color: white;
-  cursor: pointer;
-} */
-.card-detail {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.card-detail-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  width: 300px;
-  max-width: 100%;
-}
-
-.card-detail-content button {
-  margin-top: 10px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background: #007bff;
-  color: white;
-  cursor: pointer;
 }
