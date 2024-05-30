@@ -45,7 +45,7 @@
   background-color: #026aa7;
 }
 
-.add-card-section {
+.add-card-section { 
   display: flex;
   flex-direction: column;
 }
