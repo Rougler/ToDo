@@ -1,4 +1,4 @@
-/* src/components/CardDetail.css */
+/* src/components/CardDetail.css
 
 .modal {
   position: fixed;
@@ -91,4 +91,62 @@
 
 .sidebar button:hover {
   background-color: #026aa7;
+} */
+/* .card-detail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-detail-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  max-width: 100%;
+}
+
+.card-detail-content button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+} */
+.card-detail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-detail-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  max-width: 100%;
+}
+
+.card-detail-content button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
 }

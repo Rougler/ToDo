@@ -95,3 +95,4 @@ const Board = ({ onCardClick }) => {
 };
 
 export default Board;
+

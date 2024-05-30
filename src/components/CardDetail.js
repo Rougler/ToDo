@@ -81,3 +81,4 @@ const CardDetail = ({ card, onClose }) => {
 };
 
 export default CardDetail;
+
