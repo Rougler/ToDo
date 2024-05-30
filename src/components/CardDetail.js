@@ -19,7 +19,7 @@ const CardDetail = ({ card, onClose }) => {
       <div className="modal-content">
         <span className="close" onClick={onClose}>&times;</span>
         <h2>{card.title}</h2>
-        <p><strong>in list {card.listTitle}</strong></p>
+        <p><strong> {card.listTitle}</strong></p>
 
         <div className="notifications">
           <button>Watch</button>

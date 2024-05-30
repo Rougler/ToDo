@@ -28,6 +28,7 @@ const Column = ({ column, onCardClick, addCard }) => {
         />
         <button onClick={handleAddCard}>Add</button>
       </div>
+      
     </div>
   );
 };
