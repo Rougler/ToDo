@@ -8,10 +8,14 @@ const initialData = [
   { id: 4, title: 'fsdf', listTitle: 'In Progress' },
 ];
 
+const initialLists = ['To do', 'In Progress', 'Done', 'Staging'];
+
 const Board = ({ onCardClick }) => {
   const [cards, setCards] = useState(initialData);
+  const [lists, setLists] = useState(initialLists);
   const [newCardTitle, setNewCardTitle] = useState('');
   const [selectedList, setSelectedList] = useState('');
+  const [newListTitle, setNewListTitle] = useState('');
 
   const addCard = (listTitle) => {
     if (newCardTitle.trim()) {
@@ -26,9 +30,16 @@ const Board = ({ onCardClick }) => {
     }
   };
 
+  const addList = () => {
+    if (newListTitle.trim() && !lists.includes(newListTitle)) {
+      setLists([...lists, newListTitle]);
+      setNewListTitle('');
+    }
+  };
+
   return (
     <div className="board">
-      {['To do', 'In Progress', 'Done', 'Staging'].map((listTitle) => (
+      {lists.map((listTitle) => (
         <div key={listTitle} className="list">
           <h3>{listTitle}</h3>
           {cards
@@ -69,6 +80,16 @@ const Board = ({ onCardClick }) => {
           </div>
         </div>
       ))}
+      <div className="list add-new-list">
+        <h3>Add Another List</h3>
+        <input
+          type="text"
+          placeholder="New list title"
+          value={newListTitle}
+          onChange={(e) => setNewListTitle(e.target.value)}
+        />
+        <button onClick={addList}>Add List</button>
+      </div>
     </div>
   );
 };
