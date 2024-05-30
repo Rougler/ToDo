@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useState } from 'react';
 import Board from './components/Board';
 import CardDetail from './components/CardDetail';
