@@ -58,3 +58,52 @@
 .add-card {
   padding: 5px;
 }
+
+
+.add-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.add-list input {
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.add-list button {
+  padding: 5px;
+}
+
+.add-new-list {
+  border-radius: 4px;
+    padding: 10px;
+    width: 200px;
+}
+
+.add-new-list input {
+  margin-bottom: 5px;
+  padding: 5px;
+  width: 88%;
+  background-color: #4c4c4c;
+  border: none;
+  border-radius: 4px;
+  padding: 11px;
+  color: white;
+}
+
+.add-new-list button {
+  background-color: #0079bf;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    padding: 6px;
+    width: 100%;
+}
+
+
+
+
+
+
+
