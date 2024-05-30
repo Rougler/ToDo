@@ -1,12 +1,12 @@
-.App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #5a1f44;
-}
+/* src/App.css */
+
 .App {
   font-family: Arial, sans-serif;
-  text-align: center;
-  margin-top: 50px;
+  background-color: #3c3c3c;
+  color: white;
+  height : 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
