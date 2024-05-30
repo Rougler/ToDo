@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Board.css';
+import AddListForm from './AddListForm'; 
 
 const initialData = [
   { id: 1, title: 'Project planning', listTitle: 'To do' },
@@ -15,7 +16,6 @@ const Board = ({ onCardClick }) => {
   const [lists, setLists] = useState(initialLists);
   const [newCardTitle, setNewCardTitle] = useState('');
   const [selectedList, setSelectedList] = useState('');
-  const [newListTitle, setNewListTitle] = useState('');
 
   const addCard = (listTitle) => {
     if (newCardTitle.trim()) {
@@ -30,10 +30,9 @@ const Board = ({ onCardClick }) => {
     }
   };
 
-  const addList = () => {
-    if (newListTitle.trim() && !lists.includes(newListTitle)) {
+  const addList = (newListTitle) => {
+    if (!lists.includes(newListTitle)) {
       setLists([...lists, newListTitle]);
-      setNewListTitle('');
     }
   };
 
@@ -80,16 +79,7 @@ const Board = ({ onCardClick }) => {
           </div>
         </div>
       ))}
-      <div className="list add-new-list">
-        <h3>Add Another List</h3>
-        <input
-          type="text"
-          placeholder="New list title"
-          value={newListTitle}
-          onChange={(e) => setNewListTitle(e.target.value)}
-        />
-        <button onClick={addList}>Add List</button>
-      </div>
+      <AddListForm onAddList={addList} /> {/* Use the new component */}
     </div>
   );
 };

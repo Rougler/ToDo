@@ -101,6 +101,20 @@
     width: 100%;
 }
 
+.add-list-button {
+  background-color: #0079bf;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-list-button:hover {
+  background-color: #026aa7;
+}
 
 
 
