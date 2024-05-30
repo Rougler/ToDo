@@ -1,4 +1,3 @@
-// src/components/Board.js
 import React, { useState } from 'react';
 import './Board.css';
 
@@ -10,7 +9,22 @@ const initialData = [
 ];
 
 const Board = ({ onCardClick }) => {
-  const [cards] = useState(initialData);
+  const [cards, setCards] = useState(initialData);
+  const [newCardTitle, setNewCardTitle] = useState('');
+  const [selectedList, setSelectedList] = useState('');
+
+  const addCard = (listTitle) => {
+    if (newCardTitle.trim()) {
+      const newCard = {
+        id: cards.length + 1,
+        title: newCardTitle,
+        listTitle: listTitle,
+      };
+      setCards([...cards, newCard]);
+      setNewCardTitle('');
+      setSelectedList('');
+    }
+  };
 
   return (
     <div className="board">
@@ -28,7 +42,31 @@ const Board = ({ onCardClick }) => {
                 {card.title}
               </div>
             ))}
-          <button className="add-card">+ Add a card</button>
+          <div className="add-card-section">
+            {selectedList === listTitle && (
+              <input
+                type="text"
+                placeholder="Card title"
+                value={newCardTitle}
+                onChange={(e) => setNewCardTitle(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    addCard(listTitle);
+                  }
+                }}
+              />
+            )}
+            <button
+              className="add-card"
+              onClick={() =>
+                selectedList === listTitle
+                  ? addCard(listTitle)
+                  : setSelectedList(listTitle)
+              }
+            >
+              + Add a card
+            </button>
+          </div>
         </div>
       ))}
     </div>
