@@ -5,3 +5,8 @@
   height: 100vh;
   background-color: #5a1f44;
 }
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
+}
