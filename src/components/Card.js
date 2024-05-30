@@ -1,9 +1,10 @@
+// src/components/Card.js
 import React from 'react';
 import './Card.css';
 
-const Card = ({ text }) => {
+const Card = ({ text, onClick }) => {
   return (
-    <div className="card">
+    <div className="card" onClick={onClick}>
       {text}
     </div>
   );
