@@ -47,8 +47,9 @@ const Board = ({ onCardClick }) => {
       {lists.map((listTitle) => (
         <div key={listTitle} className="list">
           <div className="list-header">
+          <DeleteColumn listTitle={listTitle} onDelete={deleteList} />
             <h3>{listTitle}</h3>
-            <DeleteColumn listTitle={listTitle} onDelete={deleteList} /> {/* Add the delete button */}
+             {/* Add the delete button */}
           </div>
           {cards
             .filter((card) => card.listTitle === listTitle)
