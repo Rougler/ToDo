@@ -1,20 +1,35 @@
-import React from 'react';
-import Column from './Column';
+// src/components/Board.js
+import React, { useState } from 'react';
 import './Board.css';
 
-const Board = () => {
-  const columns = [
-    { id: 1, title: 'To do', cards: ['Project planning', 'Kickoff meeting', 'test'] },
-    { id: 2, title: 'In Progress', cards: ['sdfsdf', 'fsdf'] },
-    { id: 3, title: 'Done', cards: [] },
-    { id: 4, title: 'Staging', cards: [] },
-  ];
-//   Namaste I am Rudraprasad Mohapatra
+const initialData = [
+  { id: 1, title: 'Project planning', listTitle: 'To do' },
+  { id: 2, title: 'Kickoff meeting', listTitle: 'To do' },
+  { id: 3, title: 'sdfsdf', listTitle: 'In Progress' },
+  { id: 4, title: 'fsdf', listTitle: 'In Progress' },
+];
+
+const Board = ({ onCardClick }) => {
+  const [cards] = useState(initialData);
 
   return (
     <div className="board">
-      {columns.map((column) => (
-        <Column key={column.id} title={column.title} cards={column.cards} />
+      {['To do', 'In Progress', 'Done', 'Staging'].map((listTitle) => (
+        <div key={listTitle} className="list">
+          <h3>{listTitle}</h3>
+          {cards
+            .filter((card) => card.listTitle === listTitle)
+            .map((card) => (
+              <div
+                key={card.id}
+                className="card"
+                onClick={() => onCardClick(card)}
+              >
+                {card.title}
+              </div>
+            ))}
+          <button className="add-card">+ Add a card</button>
+        </div>
       ))}
     </div>
   );
