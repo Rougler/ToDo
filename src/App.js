@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Board from './components/Board';
 import CardDetail from './components/CardDetail';
+import Sidebar from './components/sidebar.js'; // Import Sidebar component
 import './App.css';
 
 function App() {
@@ -16,10 +17,13 @@ function App() {
 
   return (
     <div className="App">
-      <Board onCardClick={openCardDetail} />
-      {selectedCard && (
-        <CardDetail card={selectedCard} onClose={closeCardDetail} />
-      )}
+      <Sidebar /> {/* Add Sidebar component */}
+      <div className="main-content">
+        <Board onCardClick={openCardDetail} />
+        {selectedCard && (
+          <CardDetail card={selectedCard} onClose={closeCardDetail} />
+        )}
+      </div>
     </div>
   );
 }
