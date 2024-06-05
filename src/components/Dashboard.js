@@ -1,6 +1,7 @@
 import React from "react";
 import "./dashboard.css";
 import Sidebar from "./sidebar";
+import SimpleBarChart from "./BarChart.js";
 
 const Dashboard = () => {
   return (
@@ -12,7 +13,7 @@ const Dashboard = () => {
             <img src="path_to_pie_chart_image" alt="Pie Chart" />
           </div>
           <div className="chart bar-chart">
-            <img src="path_to_bar_chart_image" alt="Bar Chart" />
+            <SimpleBarChart />
           </div>
         </div>
         <div className="task-section">
