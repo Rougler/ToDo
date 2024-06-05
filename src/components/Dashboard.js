@@ -18,7 +18,7 @@ const Dashboard = () => {
         <div className="task-section">
           <div className="add-task">
             <button className="add-task-button">+</button>
-            <span>Add Task</span>
+            <span className="text">Add Task</span>
           </div>
           <table className="task-table">
             <thead>
