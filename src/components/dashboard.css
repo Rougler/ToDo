@@ -1,0 +1,69 @@
+.dashboard {
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: left;
+    padding: 20px;
+  }
+  
+  .charts {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .chart {
+    width: 45%;
+  }
+  
+  .pie-chart img,
+  .bar-chart img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .task-section {
+    padding: 20px;
+  }
+  
+  .add-task {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .add-task-button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .task-table {
+    width: 90%;
+    border-collapse: collapse;
+  }
+  
+  .task-table th,
+  .task-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .task-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .ongoing {
+    color: red;
+  }
+  
+  .completed {
+    color: green;
+  }

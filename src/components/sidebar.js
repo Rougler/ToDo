@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './sidebar.css';
+import { Link } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -15,6 +16,7 @@ const Sidebar = () => {
   };
 
   return (
+    <>
     <div className={`sidebar-left ${isOpen ? 'open' : 'closed'}`} onClick={openSidebar}>
       <button className="toggle-button" onClick={toggleSidebar}>
         {isOpen ? 'Close' : '>'}
@@ -22,14 +24,16 @@ const Sidebar = () => {
       <ul>
         <li className="sidebar-item">
           <div className="icon">🏠</div>
-          {isOpen && <span>Task Pool</span>}
+          {isOpen && <span><Link to="/" style={{"cursor":"pointer","text-decoration": "none"}}>Task Pool</Link></span>}
         </li>
         <li className="sidebar-item">
           <div className="icon">📊</div>
-          {isOpen && <span>Your Boards</span>}
+          {isOpen && <span><Link to="/dashboard" style={{"cursor":"pointer","text-decoration": "none"}}>Your Boards</Link></span>}
         </li>
       </ul>
     </div>
+    <main>{children}</main>
+    </>
   );
 };
 
