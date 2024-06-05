@@ -2,6 +2,7 @@ import React from "react";
 import "./dashboard.css";
 import Sidebar from "./sidebar";
 import SimpleBarChart from "./BarChart.js";
+import StraightAnglePieChart from "./PieChart.js"
 
 const Dashboard = () => {
   return (
@@ -10,7 +11,7 @@ const Dashboard = () => {
         <h1>Detailed Dashboard</h1>
         <div className="charts">
           <div className="chart pie-chart">
-            <img src="path_to_pie_chart_image" alt="Pie Chart" />
+          <StraightAnglePieChart/>
           </div>
           <div className="chart bar-chart">
             <SimpleBarChart />
