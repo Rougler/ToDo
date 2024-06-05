@@ -1,30 +1,18 @@
-import React, { useState } from 'react';
-import Board from './components/Board';
-import CardDetail from './components/CardDetail';
-import Sidebar from './components/sidebar.js'; // Import Sidebar component
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+
+import Sidebar from "./components/Sidebar.js"; 
+import Dashboard from "./components/Dashboard.js";
+import Home from "./components/Home.js";
 
 function App() {
-  const [selectedCard, setSelectedCard] = useState(null);
 
-  const openCardDetail = (card) => {
-    setSelectedCard(card);
-  };
-
-  const closeCardDetail = () => {
-    setSelectedCard(null);
-  };
- 
   return (
-    <div className="App">
-      <Sidebar /> {/* Add Sidebar component */}
-      <div className="main-content">
-        <Board onCardClick={openCardDetail} />
-        {selectedCard && (
-          <CardDetail card={selectedCard} onClose={closeCardDetail} />
-        )}
-      </div>
-    </div>
+    <Sidebar>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/dashboard" element={<Dashboard />}/>
+      </Routes>
+    </Sidebar>
   );
 }
 
