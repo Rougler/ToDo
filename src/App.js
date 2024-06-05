@@ -14,7 +14,7 @@ function App() {
   const closeCardDetail = () => {
     setSelectedCard(null);
   };
-
+ 
   return (
     <div className="App">
       <Sidebar /> {/* Add Sidebar component */}
