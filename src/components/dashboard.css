@@ -1,10 +1,14 @@
 .dashboard {
     font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow: auto;
   }
   
   h1 {
     text-align: left;
     padding: 20px;
+    background: rgb(72, 49, 104);
+    color: white;
   }
   
   .charts {
@@ -25,12 +29,15 @@
   
   .task-section {
     padding: 20px;
+    width: 50%;
   }
   
   .add-task {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    padding: 12px;
+    background: #dddddd;
   }
   
   .add-task-button {
@@ -39,13 +46,19 @@
     border: none;
     background-color: black;
     color: white;
+    border-radius: 5px;
     font-size: 24px;
     margin-right: 10px;
     cursor: pointer;
   }
+
+  .text{
+    font-weight: bold;
+    font-size: 20px;
+  }
   
   .task-table {
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
   }
   
