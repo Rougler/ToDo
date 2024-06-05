@@ -8,6 +8,9 @@ const data = [
   { label: 'Group D', value: 200 },
   { label: 'Group E', value: 278 },
   { label: 'Group F', value: 189 },
+  { label: 'Group G', value: 200 },
+  { label: 'Group H', value: 278 },
+  { label: 'Group I', value: 189 },
 ];
 
 export default function StraightAnglePieChart() {
