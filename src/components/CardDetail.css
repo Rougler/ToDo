@@ -1,6 +1,6 @@
 /* src/components/CardDetail.css */
  
-/* .modal {
+.modal-one {
   position: fixed;
   z-index: 1;
   left: 0;
@@ -10,7 +10,7 @@
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-} */
+}
  
 .modal-content {
   background-color: #3c3c3c;
