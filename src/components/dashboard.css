@@ -1,7 +1,10 @@
 .dashboard {
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
-    overflow: auto;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  /* width: 100%; */
+  min-width: 100vh;
+  overflow: hidden;
+  background: #ececec;
   }
   
   h1 {
@@ -20,9 +23,10 @@
   }
   
   .chart {
-    width: 45%;
+    width: 46%;
+    background: white;
     padding: 20px;
-    box-shadow: 0px 0px 4px 0px gray;  }
+    box-shadow: 0px 0px 4px 0px gray; }
   
   .pie-chart img,
   .bar-chart img {
@@ -32,9 +36,11 @@
   
   .task-section {
     padding: 20px;
-    width: 50%;
+    /* width: 100%; */
+    /* overflow: hidden; */
     box-shadow: 0px 0px 4px 0px gray;
     margin: 25px;
+    background: white;
   }
   
   .add-task {
