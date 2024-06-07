@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Board.css';
-import AddListForm from './AddListForm'; 
+import AddListForm from './AddListForm';
 import DeleteColumn from './DeleteColumn'; // Import the DeleteColumn component
 
 const initialData = [
@@ -47,9 +47,9 @@ const Board = ({ onCardClick }) => {
       {lists.map((listTitle) => (
         <div key={listTitle} className="list">
           <div className="list-header">
-          <DeleteColumn listTitle={listTitle} onDelete={deleteList} />
+            <DeleteColumn listTitle={listTitle} onDelete={deleteList} />
             <h3>{listTitle}</h3>
-             {/* Add the delete button */}
+            {/* Add the delete button */}
           </div>
           {cards
             .filter((card) => card.listTitle === listTitle)
@@ -64,8 +64,7 @@ const Board = ({ onCardClick }) => {
             ))}
           <div className="add-card-section">
             {selectedList === listTitle && (
-              <input
-                type="text"
+              <textarea
                 placeholder="Card title"
                 value={newCardTitle}
                 onChange={(e) => setNewCardTitle(e.target.value)}
@@ -87,11 +86,12 @@ const Board = ({ onCardClick }) => {
               + Add a card
             </button>
           </div>
+
         </div>
-        
+
       ))}
       <AddListForm onAddList={addList} /> {/* Use the new component */}
-      
+
     </div>
   );
 };

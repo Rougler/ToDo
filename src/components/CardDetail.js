@@ -19,11 +19,9 @@ const CardDetail = ({ card, onClose }) => {
       <div className="modal-content">
         <span className="close" onClick={onClose}>&times;</span>
         <h2>{card.title}</h2>
-        <p><strong>in list {card.listTitle}</strong></p>
+        
 
-        <div className="notifications">
-          <button>Watch</button>
-        </div>
+        
 
         <div className="description">
           <h3>Description</h3>
@@ -34,26 +32,11 @@ const CardDetail = ({ card, onClose }) => {
           ></textarea>
         </div>
 
-        <div className="activity">
-          <h3>Activity</h3>
-          <div className="comments">
-            {comments.map((comment, index) => (
-              <div key={index} className="comment">
-                <span className="comment-author">NS</span>
-                <p>{comment}</p>
-              </div>
-            ))}
-          </div>
-          <textarea
-            placeholder="Write a comment..."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          ></textarea>
-          <button onClick={handleAddComment}>Add Comment</button>
-        </div>
+        
 
         <div className="sidebar">
           <h3>Add to card</h3>
+          <div className='sidebar-button'>
           <button>Members</button>
           <button>Labels</button>
           <button>Checklist</button>
@@ -61,19 +44,26 @@ const CardDetail = ({ card, onClose }) => {
           <button>Attachment</button>
           <button>Cover</button>
           <button>Custom Fields</button>
+          </div>
 
           <h3>Power-Ups</h3>
+          <div className='sidebar-button'>
           <button>Add Power-Ups</button>
+          </div>
 
           <h3>Automation</h3>
+          <div className='sidebar-button'>
           <button>Add button</button>
+          </div>
 
           <h3>Actions</h3>
+          <div className='sidebar-button'>
           <button>Move</button>
           <button>Copy</button>
           <button>Make template</button>
           <button>Archive</button>
           <button>Share</button>
+          </div>
         </div>
       </div>
     </div>
