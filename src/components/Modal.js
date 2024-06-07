@@ -17,8 +17,8 @@ const Modal = ({ showModal, handleClose, addTask }) => {
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
+    <div className="modal-overlay-card">
+      <div className="modal-card">
         <h2>Add New Task</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
