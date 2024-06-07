@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./dashboard.css";
-import Sidebar from "./sidebar";
 import SimpleBarChart from "./BarChart.js";
 import StraightAnglePieChart from "./PieChart.js";
 import Modal from "./Modal.js";

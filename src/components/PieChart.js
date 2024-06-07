@@ -18,9 +18,7 @@ export default function StraightAnglePieChart() {
     <PieChart
       series={[
         {
-          startAngle: -90,
-          endAngle: 90,
-          data,
+         data,
         },
       ]}
       height={300}
