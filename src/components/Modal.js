@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import Select from "react-select";
 import "./Modal.css";
 
 const Modal = ({ showModal, handleClose, addTask }) => {
   const [taskName, setTaskName] = useState("");
   const [taskStatus, setTaskStatus] = useState("On-going");
-  const [assignedTo, setAssignedTo] = useState("");
+  const [assignedTo, setAssignedTo] = useState([]);
+
+  const options = [
+    { value: "John", label: "John" },
+    { value: "Alice", label: "Alice" },
+    { value: "Bob", label: "Bob" },
+    // Add more options as needed
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,8 +25,8 @@ const Modal = ({ showModal, handleClose, addTask }) => {
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
+    <div className="modal-overlay-card">
+      <div className="modal-card">
         <h2>Add New Task</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -42,11 +50,11 @@ const Modal = ({ showModal, handleClose, addTask }) => {
           </div>
           <div className="form-group">
             <label>Assigned To:</label>
-            <input
-              type="text"
+            <Select
+              isMulti
+              options={options}
               value={assignedTo}
-              onChange={(e) => setAssignedTo(e.target.value)}
-              required
+              onChange={setAssignedTo}
             />
           </div>
           <button type="submit">Add Task</button>

@@ -1,4 +1,4 @@
-.modal-overlay {
+.modal-overlay-card {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,12 +11,14 @@
     animation: fadeIn 0.3s ease-in-out;
   }
   
-  .modal {
+  .modal-card {
     animation: slideIn 0.3s ease-in-out;
-    width: 100%;
-    
+    width: 50%;
     position: relative;
-    top:-50px;
+    top: -50px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
   }
   
   .form-group {
@@ -46,7 +48,7 @@
     outline: none;
   }
   
-  .modal-overlay button {
+  .modal-overlay-card button {
     margin-right: 10px;
     padding: 10px 20px;
     border: none;

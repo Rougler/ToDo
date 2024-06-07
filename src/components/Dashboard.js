@@ -11,17 +11,17 @@ const Dashboard = () => {
     {
       taskName: "To-Do Application",
       taskStatus: "On-going",
-      assignedTo: "Swati, Nitish, SK Bains, Bitnes, Subrat",
+      assignedTo: ["Swati", "Nitish", "SK Bains", "Bitnes", "Subrat"], // Convert string to array
     },
     {
       taskName: "Cloud OptGen",
       taskStatus: "On-going",
-      assignedTo: "Swati, Nitish, SK Bains, Bitnes, Subrat",
+      assignedTo: ["Swati", "Nitish", "SK Bains", "Bitnes", "Subrat"], // Convert string to array
     },
     {
       taskName: "CSPM",
       taskStatus: "Completed",
-      assignedTo: "Swati, Nitish, SK Bains, Bitnes, Subrat",
+      assignedTo: ["Swati", "Nitish", "SK Bains", "Bitnes", "Subrat"], // Convert string to array
     },
   ]);
 
@@ -62,7 +62,7 @@ const Dashboard = () => {
                 <tr key={index}>
                   <td>{task.taskName}</td>
                   <td className={task.taskStatus.toLowerCase().replace(" ", "-")}>{task.taskStatus}</td>
-                  <td>{task.assignedTo}</td>
+                  <td>{task.assignedTo.join(", ")}</td> {/* Convert array to string */}
                 </tr>
               ))}
             </tbody>
