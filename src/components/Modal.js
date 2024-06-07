@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import Select from "react-select";
 import "./Modal.css";
 
 const Modal = ({ showModal, handleClose, addTask }) => {
   const [taskName, setTaskName] = useState("");
   const [taskStatus, setTaskStatus] = useState("On-going");
-  const [assignedTo, setAssignedTo] = useState("");
+  const [assignedTo, setAssignedTo] = useState([]);
+
+  const options = [
+    { value: "John", label: "John" },
+    { value: "Alice", label: "Alice" },
+    { value: "Bob", label: "Bob" },
+    // Add more options as needed
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,11 +50,11 @@ const Modal = ({ showModal, handleClose, addTask }) => {
           </div>
           <div className="form-group">
             <label>Assigned To:</label>
-            <input
-              type="text"
+            <Select
+              isMulti
+              options={options}
               value={assignedTo}
-              onChange={(e) => setAssignedTo(e.target.value)}
-              required
+              onChange={setAssignedTo}
             />
           </div>
           <button type="submit">Add Task</button>
