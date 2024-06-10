@@ -122,3 +122,24 @@
 .sidebar button:hover {
   background-color: #026aa7;
 }
+
+
+
+.edit-icon {
+  font-size: 0.8em;
+  color: #FFD700; /* Attractive gold color */
+  transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+  color: #FFA500; /* Change color on hover */
+}
+
+
+.edit-link {
+  cursor: pointer;
+  text-decoration: none; /* Remove underline from link */
+}
+
+
+
