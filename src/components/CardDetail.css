@@ -26,6 +26,8 @@
 
 .modal-content h2{
   word-wrap: break-word; 
+  white-space: normal;
+  clear: both;
 }
  
 .close {
