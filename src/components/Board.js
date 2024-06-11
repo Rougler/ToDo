@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './Board.css';
 import AddListForm from './AddListForm';
-import DeleteColumn from './DeleteColumn'; // Import the DeleteColumn component
+import DeleteColumn from './DeleteColumn';
+import CardDetail from './CardDetail'; // Import the CardDetail component
 
 const initialData = [
   { id: 1, title: 'Project planning', listTitle: 'To do' },
@@ -12,11 +13,12 @@ const initialData = [
 
 const initialLists = ['To do', 'In Progress', 'Done', 'Staging'];
 
-const Board = ({ onCardClick }) => {
+const Board = () => {
   const [cards, setCards] = useState(initialData);
   const [lists, setLists] = useState(initialLists);
   const [newCardTitle, setNewCardTitle] = useState('');
   const [selectedList, setSelectedList] = useState('');
+  const [selectedCard, setSelectedCard] = useState(null); // State to manage the selected card for details
 
   const addCard = (listTitle) => {
     if (newCardTitle.trim()) {
@@ -42,6 +44,14 @@ const Board = ({ onCardClick }) => {
     setCards(cards.filter((card) => card.listTitle !== listTitle));
   };
 
+  const handleMoveCard = (cardId, newListTitle, newPosition) => {
+    const cardIndex = cards.findIndex(card => card.id === cardId);
+    const updatedCard = { ...cards[cardIndex], listTitle: newListTitle };
+    const updatedCards = cards.filter(card => card.id !== cardId);
+    updatedCards.splice(newPosition - 1, 0, updatedCard);
+    setCards(updatedCards);
+  };
+
   return (
     <div className="board">
       {lists.map((listTitle) => (
@@ -49,7 +59,6 @@ const Board = ({ onCardClick }) => {
           <div className="list-header">
             <DeleteColumn listTitle={listTitle} onDelete={deleteList} />
             <h3>{listTitle}</h3>
-            {/* Add the delete button */}
           </div>
           {cards
             .filter((card) => card.listTitle === listTitle)
@@ -57,7 +66,7 @@ const Board = ({ onCardClick }) => {
               <div
                 key={card.id}
                 className="card"
-                onClick={() => onCardClick(card)}
+                onClick={() => setSelectedCard(card)} // Set the selected card for details
               >
                 {card.title}
               </div>
@@ -86,12 +95,18 @@ const Board = ({ onCardClick }) => {
               + Add a card
             </button>
           </div>
-
         </div>
-
       ))}
-      <AddListForm onAddList={addList} /> {/* Use the new component */}
+      <AddListForm onAddList={addList} />
 
+      {selectedCard && (
+        <CardDetail
+          card={selectedCard}
+          lists={lists}
+          onMove={handleMoveCard}
+          onClose={() => setSelectedCard(null)} // Close the CardDetail modal
+        />
+      )}
     </div>
   );
 };

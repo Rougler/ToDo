@@ -11,6 +11,19 @@
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
+.date-picker-popup {
+  position: fixed; /* Position the date picker relative to the viewport */
+  top: 50%; /* Position it at the vertical center */
+  left: 50%; /* Position it at the horizontal center */
+  transform: translate(-50%, -50%); /* Center it precisely */
+  z-index: 1000; /* Ensure it appears above other content */
+  background-color: white; /* Set background color */
+  border: 1px solid #ccc; /* Add border */
+  padding: 10px; /* Add padding */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  size: 50%;
+}
+
  
 .modal-content {
   background-color: #000000;
@@ -24,8 +37,13 @@
     position: relative;
 }
 
+button[type="button"] {
+  background-color: #ffffff;
+}
 .modal-content h2{
   word-wrap: break-word; 
+  white-space: normal;
+  clear: both;
 }
  
 .close {
@@ -141,5 +159,7 @@
   text-decoration: none; /* Remove underline from link */
 }
 
-
+.edit-icon[disabled] {
+  cursor: not-allowed;
+}
 
