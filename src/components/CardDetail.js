@@ -3,12 +3,18 @@ import './CardDetail.css';
 import MoveCard from './MoveCard'; // Import the MoveCard component
 import ResponsiveDateRangePickers from './Date'; // Import the date picker component
 
-const CardDetail = ({ card, lists, onMove, onClose }) => {
+const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => { // Add onSaveTitle prop
   const [description, setDescription] = useState('');
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [showMoveCard, setShowMoveCard] = useState(false); // State to manage the visibility of MoveCard modal
   const [showDatePicker, setShowDatePicker] = useState(false); // State to manage the visibility of date picker
+  const [showChecklist, setShowChecklist] = useState(false); // State to manage the visibility of checklist
+  const [checklistItems, setChecklistItems] = useState([]);
+  const [newChecklistItem, setNewChecklistItem] = useState('');
+
+  const [isEditingTitle, setIsEditingTitle] = useState(false); // State to manage edit mode for the title
+  const [title, setTitle] = useState(card.title); // State for the card title
 
   const handleAddComment = () => {
     if (newComment.trim()) {
@@ -21,11 +27,59 @@ const CardDetail = ({ card, lists, onMove, onClose }) => {
     setShowDatePicker(!showDatePicker); // Toggle the visibility state of the date picker
   };
 
+  const toggleChecklist = () => {
+    setShowChecklist(!showChecklist); // Toggle the visibility state of the checklist
+  };
+
+  const handleAddChecklistItem = () => {
+    if (newChecklistItem.trim()) {
+      setChecklistItems([...checklistItems, { text: newChecklistItem, completed: false }]);
+      setNewChecklistItem('');
+    }
+  };
+
+  const handleToggleChecklistItem = (index) => {
+    const updatedItems = checklistItems.map((item, i) => 
+      i === index ? { ...item, completed: !item.completed } : item
+    );
+    setChecklistItems(updatedItems);
+  };
+
+  const handleDeleteChecklistItem = (index) => {
+    const updatedItems = checklistItems.filter((_, i) => i !== index);
+    setChecklistItems(updatedItems);
+  };
+
+  const handleEditTitle = () => {
+    setIsEditingTitle(true);
+  };
+
+  const handleSaveTitle = () => {
+    onSaveTitle(card.id, title); // Call the onSaveTitle callback with the updated title
+    setIsEditingTitle(false);
+  };
+
   return (
     <div className="modal-one">
       <div className="modal-content">
         <span className="close" onClick={onClose}>&times;</span>
-        <h2>{card.title}</h2>
+        
+        <div className="title-section">
+          {isEditingTitle ? (
+            <input 
+              type="text" 
+              value={title} 
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          ) : (
+            <h2>{title}</h2>
+          )}
+          {isEditingTitle ? (
+            <button onClick={handleSaveTitle}>Save</button>
+          ) : (
+            <button onClick={handleEditTitle}>Edit</button>
+          )}
+        </div>
 
         <div className="description">
           <h3>Description</h3>
@@ -39,8 +93,7 @@ const CardDetail = ({ card, lists, onMove, onClose }) => {
         <div className="sidebar">
           <h3>Add to card</h3>
           <div className='sidebar-button'>
-            
-            <button>Checklist</button>
+            <button onClick={toggleChecklist}>Checklist</button>
             <button onClick={toggleDatePicker}>Dates</button> {/* Call toggleDatePicker on button click */}
             {showDatePicker && (
               <div className="date-picker-popup"> {/* Wrap the date picker in a div with a class for styling */}
@@ -48,10 +101,43 @@ const CardDetail = ({ card, lists, onMove, onClose }) => {
               </div>
             )} {/* Render date picker if showDatePicker is true */}
             <button>Attachment</button>
-            
             <button>Custom Fields</button>
           </div>
 
+          {showChecklist && (
+            <div className="checklist">
+              <h3>Checklist</h3>
+              {checklistItems.map((item, index) => (
+                <div key={index} className="checklist-item">
+                  <input
+                    type="checkbox"
+                    checked={item.completed}
+                    onChange={() => handleToggleChecklistItem(index)}
+                  />
+                  <input
+                    type="text"
+                    value={item.text}
+                    readOnly
+                  />
+                  <button onClick={() => handleDeleteChecklistItem(index)}>Delete</button>
+                </div>
+              ))}
+              <div className="checklist-item">
+                <input
+                  type="text"
+                  placeholder="Add an item"
+                  value={newChecklistItem}
+                  onChange={(e) => setNewChecklistItem(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleAddChecklistItem();
+                    }
+                  }}
+                />
+                <button onClick={handleAddChecklistItem}>Add</button>
+              </div>
+            </div>
+          )}
 
           <h3>Automation</h3>
           <div className='sidebar-button'>
