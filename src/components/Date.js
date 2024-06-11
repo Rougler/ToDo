@@ -1,40 +1,15 @@
 import * as React from 'react';
-
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import { LocalizationProvider } from '@mui/x-date-pickers-pro';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers-pro/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
-import { DesktopDateRangePicker } from '@mui/x-date-pickers-pro/DesktopDateRangePicker';
+import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 
-export default function ResponsiveDateRangePicker() {
-  const [value, setValue] = React.useState([null, null]);
-
+export default function BasicDateRangePicker() {
   return (
-    <Stack spacing={3}>
-      <LocalizationProvider
-        dateAdapter={AdapterDayjs}
-        localeText={{ start: 'Mobile start', end: 'Mobile end' }}
-      >
-        </LocalizationProvider>
-      <LocalizationProvider
-        dateAdapter={AdapterDayjs}
-        localeText={{ start: 'start', end: 'end' }}
-      >
-        <DesktopDateRangePicker
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(startProps, endProps) => (
-            <React.Fragment>
-              <TextField {...startProps} />
-              <Box sx={{ mx: 2 }}> to </Box>
-              <TextField {...endProps} />
-            </React.Fragment>
-          )}
-        />
-      </LocalizationProvider>
-    </Stack>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer components={['DateRangePicker']}>
+        <DateRangePicker localeText={{ start: 'Check-in', end: 'Check-out' }} />
+      </DemoContainer>
+    </LocalizationProvider>
   );
 }

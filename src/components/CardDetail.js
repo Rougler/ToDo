@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CardDetail.css';
 import MoveCard from './MoveCard'; // Import the MoveCard component
-import ResponsiveDateRangePickers from './Date'; // Import the date picker component
+import BasicDateRangePicker from './Date'; // Import the date picker component
 
 const CardDetail = ({ card, lists, onMove, onClose }) => {
   const [description, setDescription] = useState('');
@@ -44,7 +44,7 @@ const CardDetail = ({ card, lists, onMove, onClose }) => {
             <button onClick={toggleDatePicker}>Dates</button> {/* Call toggleDatePicker on button click */}
             {showDatePicker && (
               <div className="date-picker-popup"> {/* Wrap the date picker in a div with a class for styling */}
-                <ResponsiveDateRangePickers />
+                <BasicDateRangePicker />
               </div>
             )} {/* Render date picker if showDatePicker is true */}
             <button>Attachment</button>
