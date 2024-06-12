@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './Board.css';
 import AddListForm from './AddListForm';
 import DeleteColumn from './DeleteColumn';
-import CardDetail from './CardDetail'; // Import the CardDetail component
+import CardDetail from './CardDetail';
 
 const initialData = [
   { id: 1, title: 'Project planning', listTitle: 'To do' },
-  { id: 2, title: 'Kickoff Meeting', listTitle: 'To do' },
+  { id: 2, title: 'Kickoff meeting', listTitle: 'To do' },
   { id: 3, title: 'sdfsdf', listTitle: 'In Progress' },
   { id: 4, title: 'fsdf', listTitle: 'In Progress' },
 ];
@@ -18,7 +18,7 @@ const Board = () => {
   const [lists, setLists] = useState(initialLists);
   const [newCardTitle, setNewCardTitle] = useState('');
   const [selectedList, setSelectedList] = useState('');
-  const [selectedCard, setSelectedCard] = useState(null); // State to manage the selected card for details
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const addCard = (listTitle) => {
     if (newCardTitle.trim()) {
@@ -52,8 +52,13 @@ const Board = () => {
     setCards(updatedCards);
   };
 
+  const handleDeleteCard = (cardId) => {
+    setCards(cards.filter((card) => card.id !== cardId));
+    setSelectedCard(null);
+  };
+
   const handleSaveTitle = (cardId, newTitle) => {
-    const updatedCards = cards.map(card => 
+    const updatedCards = cards.map(card =>
       card.id === cardId ? { ...card, title: newTitle } : card
     );
     setCards(updatedCards);
@@ -73,7 +78,7 @@ const Board = () => {
               <div
                 key={card.id}
                 className="card"
-                onClick={() => setSelectedCard(card)} // Set the selected card for details
+                onClick={() => setSelectedCard(card)}
               >
                 {card.title}
               </div>
@@ -111,8 +116,9 @@ const Board = () => {
           card={selectedCard}
           lists={lists}
           onMove={handleMoveCard}
-          onSaveTitle={handleSaveTitle} // Pass the handleSaveTitle function to CardDetail
-          onClose={() => setSelectedCard(null)} // Close the CardDetail modal
+          onClose={() => setSelectedCard(null)}
+          onDelete={handleDeleteCard}
+          onSaveTitle={handleSaveTitle} // Pass the handleSaveTitle function
         />
       )}
     </div>

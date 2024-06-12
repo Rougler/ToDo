@@ -3,7 +3,7 @@ import './CardDetail.css';
 import MoveCard from './MoveCard'; // Import the MoveCard component
 import ResponsiveDateRangePickers from './Date'; // Import the date picker component
 
-const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => { // Add onSaveTitle prop
+const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => { // Add onDelete prop
   const [description, setDescription] = useState('');
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
@@ -57,6 +57,10 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => { // Add o
   const handleSaveTitle = () => {
     onSaveTitle(card.id, title); // Call the onSaveTitle callback with the updated title
     setIsEditingTitle(false);
+  };
+
+  const handleDeleteCard = () => {
+    onDelete(card.id); // Call the onDelete callback with the card id
   };
 
   return (
@@ -147,7 +151,7 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => { // Add o
           <h3>Actions</h3>
           <div className='sidebar-button'>
             <button onClick={() => setShowMoveCard(true)}>Move</button> {/* Add onClick event */}
-            <button>Archive</button>
+            <button onClick={handleDeleteCard}>Delete</button> {/* Add delete button */}
             <button>Share</button>
           </div>
         </div>

@@ -47,6 +47,7 @@ button[type="button"] {
     font-size: 24px;
     font-weight: 600;
     color: #006eae;
+    display: inline;
 }
  
 .close {
@@ -162,6 +163,7 @@ button[type="button"] {
   border-radius: 4px;
   padding: 0.5rem;
   color: black;
+  resize: none;
 }
 
 .sidebar {
@@ -226,8 +228,8 @@ button[type="button"] {
   background-color: #c9302c;
 }
 
-.title-section {
-  display: flex;
+.title-section{
+  clear: both;
 }
 
 .title-section button{
