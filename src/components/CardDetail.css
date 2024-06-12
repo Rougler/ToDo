@@ -252,3 +252,43 @@ button[type="button"] {
   background-color: #aaa;
   color: black;
 }
+
+
+
+
+.title-section {
+  display: flex;
+  align-items: center;
+ 
+}
+
+.edit-icon {
+  cursor: pointer;
+  margin-left: 17px;
+  color: #ccc;
+  margin-top: -2px;
+  color: #9c9c9c;
+}
+
+.edit-icon:hover {
+  color: #026aa7;
+}
+
+
+.attachments {
+  margin-top: 20px;
+}
+
+.attachment {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.attachment .fa-paperclip {
+  margin-right: 10px;
+}
+
+.attachment-input {
+  margin-top: 10px;
+}

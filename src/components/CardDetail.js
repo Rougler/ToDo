@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import './CardDetail.css';
-import MoveCard from './MoveCard'; // Import the MoveCard component
-import ResponsiveDateRangePickers from './Date'; // Import the date picker component
+import MoveCard from './MoveCard';
+import ResponsiveDateRangePickers from './Date';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 
-const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => { // Add onSaveTitle prop
+const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => {
   const [description, setDescription] = useState('');
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-  const [showMoveCard, setShowMoveCard] = useState(false); // State to manage the visibility of MoveCard modal
-  const [showDatePicker, setShowDatePicker] = useState(false); // State to manage the visibility of date picker
-  const [showChecklist, setShowChecklist] = useState(false); // State to manage the visibility of checklist
+  const [showMoveCard, setShowMoveCard] = useState(false);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showChecklist, setShowChecklist] = useState(false);
   const [checklistItems, setChecklistItems] = useState([]);
   const [newChecklistItem, setNewChecklistItem] = useState('');
-
-  const [isEditingTitle, setIsEditingTitle] = useState(false); // State to manage edit mode for the title
-  const [title, setTitle] = useState(card.title); // State for the card title
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [title, setTitle] = useState(card.title);
+  const [attachments, setAttachments] = useState([]);
+  const [showAttachmentInput, setShowAttachmentInput] = useState(false);
 
   const handleAddComment = () => {
     if (newComment.trim()) {
@@ -24,11 +27,11 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => { // Add o
   };
 
   const toggleDatePicker = () => {
-    setShowDatePicker(!showDatePicker); // Toggle the visibility state of the date picker
+    setShowDatePicker(!showDatePicker);
   };
 
   const toggleChecklist = () => {
-    setShowChecklist(!showChecklist); // Toggle the visibility state of the checklist
+    setShowChecklist(!showChecklist);
   };
 
   const handleAddChecklistItem = () => {
@@ -39,7 +42,7 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => { // Add o
   };
 
   const handleToggleChecklistItem = (index) => {
-    const updatedItems = checklistItems.map((item, i) => 
+    const updatedItems = checklistItems.map((item, i) =>
       i === index ? { ...item, completed: !item.completed } : item
     );
     setChecklistItems(updatedItems);
@@ -55,15 +58,22 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => { // Add o
   };
 
   const handleSaveTitle = () => {
-    onSaveTitle(card.id, title); // Call the onSaveTitle callback with the updated title
+    onSaveTitle(card.id, title);
     setIsEditingTitle(false);
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setAttachments([...attachments, { name: file.name, file }]);
+    }
   };
 
   return (
     <div className="modal-one">
       <div className="modal-content">
         <span className="close" onClick={onClose}>&times;</span>
-        
+
         <div className="title-section">
           {isEditingTitle ? (
             <input 
@@ -77,7 +87,7 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => { // Add o
           {isEditingTitle ? (
             <button onClick={handleSaveTitle}>Save</button>
           ) : (
-            <button onClick={handleEditTitle}>Edit</button>
+            <FontAwesomeIcon icon={faEdit} onClick={handleEditTitle} className="edit-icon" />
           )}
         </div>
 
@@ -94,13 +104,18 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => { // Add o
           <h3>Add to card</h3>
           <div className='sidebar-button'>
             <button onClick={toggleChecklist}>Checklist</button>
-            <button onClick={toggleDatePicker}>Dates</button> {/* Call toggleDatePicker on button click */}
+            <button onClick={toggleDatePicker}>Dates</button>
             {showDatePicker && (
-              <div className="date-picker-popup"> {/* Wrap the date picker in a div with a class for styling */}
+              <div className="date-picker-popup">
                 <ResponsiveDateRangePickers />
               </div>
-            )} {/* Render date picker if showDatePicker is true */}
-            <button>Attachment</button>
+            )}
+            <button onClick={() => setShowAttachmentInput(!showAttachmentInput)}>Attachment</button>
+            {showAttachmentInput && (
+              <div className="attachment-input">
+                <input type="file" onChange={handleFileUpload} />
+              </div>
+            )}
             <button>Custom Fields</button>
           </div>
 
@@ -146,11 +161,23 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => { // Add o
 
           <h3>Actions</h3>
           <div className='sidebar-button'>
-            <button onClick={() => setShowMoveCard(true)}>Move</button> {/* Add onClick event */}
+            <button onClick={() => setShowMoveCard(true)}>Move</button>
             <button>Archive</button>
             <button>Share</button>
           </div>
         </div>
+
+        {attachments.length > 0 && (
+          <div className="attachments">
+            <h3>Attachments</h3>
+            {attachments.map((attachment, index) => (
+              <div key={index} className="attachment">
+                <FontAwesomeIcon icon={faPaperclip} />
+                <span>{attachment.name}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       {showMoveCard && (
         <MoveCard
@@ -158,9 +185,9 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => { // Add o
           lists={lists}
           onMove={(cardId, newListTitle, newPosition) => {
             onMove(cardId, newListTitle, newPosition);
-            setShowMoveCard(false); // Close the MoveCard modal after moving the card
+            setShowMoveCard(false);
           }}
-          onClose={() => setShowMoveCard(false)} // Close the MoveCard modal
+          onClose={() => setShowMoveCard(false)}
         />
       )}
     </div>
