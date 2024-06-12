@@ -10,17 +10,17 @@ const Dashboard = () => {
     {
       taskName: "To-Do Application",
       taskStatus: "On-going",
-      assignedTo: ["Swati", "Nitish", "SK Bains", "Bitnes", "Subrat"], // Convert string to array
+      assignedTo: ["Swati", "Nitish", "SK Bains", "Bitnes", "Subrat"],
     },
     {
       taskName: "Cloud OptGen",
       taskStatus: "On-going",
-      assignedTo: ["Swati", "Nitish", "SK Bains", "Bitnes", "Subrat"], // Convert string to array
+      assignedTo: ["Swati", "Nitish", "SK Bains", "Bitnes", "Subrat"],
     },
     {
       taskName: "CSPM",
       taskStatus: "Completed",
-      assignedTo: ["Swati", "Nitish", "SK Bains", "Bitnes", "Subrat"], // Convert string to array
+      assignedTo: ["Swati", "Nitish", "SK Bains", "Bitnes", "Subrat"],
     },
   ]);
 
@@ -31,16 +31,29 @@ const Dashboard = () => {
     setTasks([...tasks, task]);
   };
 
+  const taskStatusCounts = () => {
+    const counts = {
+      "On-going": 0,
+      "Completed": 0,
+    };
+
+    tasks.forEach((task) => {
+      counts[task.taskStatus] += 1;
+    });
+
+    return counts;
+  };
+
   return (
     <>
       <div className="dashboard">
         <h1>Detailed Dashboard</h1>
         <div className="charts">
           <div className="chart pie-chart">
-            <StraightAnglePieChart />
+            <StraightAnglePieChart data={taskStatusCounts()} />
           </div>
           <div className="chart bar-chart">
-            <SimpleBarChart />
+            <SimpleBarChart tasks={tasks} />
           </div>
         </div>
         <div className="task-section">
@@ -61,7 +74,7 @@ const Dashboard = () => {
                 <tr key={index}>
                   <td>{task.taskName}</td>
                   <td className={task.taskStatus.toLowerCase().replace(" ", "-")}>{task.taskStatus}</td>
-                  <td>{task.assignedTo.join(", ")}</td> {/* Convert array to string */}
+                  <td>{task.assignedTo.join(", ")}</td>
                 </tr>
               ))}
             </tbody>

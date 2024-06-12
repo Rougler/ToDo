@@ -11,12 +11,13 @@ const Modal = ({ showModal, handleClose, addTask }) => {
     { value: "John", label: "John" },
     { value: "Alice", label: "Alice" },
     { value: "Bob", label: "Bob" },
-    // Add more options as needed
   ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTask({ taskName, taskStatus, assignedTo });
+    // Convert assignedTo to an array of names
+    const assignedToNames = assignedTo.map(person => person.label);
+    addTask({ taskName, taskStatus, assignedTo: assignedToNames });
     handleClose();
   };
 
