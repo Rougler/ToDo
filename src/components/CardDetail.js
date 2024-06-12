@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import './CardDetail.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faEye, faCheckSquare, faClock, faPaperclip, faMapMarkerAlt, faImage,
+  faUser, faTags, faTrashAlt, faList, faAlignLeft, faComments, faEdit
+} from '@fortawesome/free-solid-svg-icons';
 import MoveCard from './MoveCard';
 import ResponsiveDateRangePickers from './Date';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 
-const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => {
+const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => {
   const [description, setDescription] = useState('');
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
@@ -16,8 +19,6 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => {
   const [newChecklistItem, setNewChecklistItem] = useState('');
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [title, setTitle] = useState(card.title);
-  const [attachments, setAttachments] = useState([]);
-  const [showAttachmentInput, setShowAttachmentInput] = useState(false);
 
   const handleAddComment = () => {
     if (newComment.trim()) {
@@ -62,11 +63,8 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => {
     setIsEditingTitle(false);
   };
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAttachments([...attachments, { name: file.name, file }]);
-    }
+  const handleDeleteCard = () => {
+    onDelete(card.id);
   };
 
   return (
@@ -76,23 +74,28 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => {
 
         <div className="title-section">
           {isEditingTitle ? (
-            <input 
-              type="text" 
-              value={title} 
+            <input
+              type="text"
+              value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           ) : (
-            <h2>{title}</h2>
+            <h2>
+              {title}
+              <FontAwesomeIcon
+                icon={faEdit}
+                className="edit-icon"
+                onClick={handleEditTitle}
+              />
+            </h2>
           )}
-          {isEditingTitle ? (
+          {isEditingTitle && (
             <button onClick={handleSaveTitle}>Save</button>
-          ) : (
-            <FontAwesomeIcon icon={faEdit} onClick={handleEditTitle} className="edit-icon" />
           )}
         </div>
 
         <div className="description">
-          <h3>Description</h3>
+          <h3><FontAwesomeIcon icon={faAlignLeft} /> Description</h3>
           <textarea
             placeholder="Add a more detailed description..."
             value={description}
@@ -103,20 +106,17 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => {
         <div className="sidebar">
           <h3>Add to card</h3>
           <div className='sidebar-button'>
-            <button onClick={toggleChecklist}>Checklist</button>
-            <button onClick={toggleDatePicker}>Dates</button>
+            <a onClick={toggleChecklist}><FontAwesomeIcon icon={faCheckSquare} /> Checklist</a>
+            <a onClick={toggleDatePicker}><FontAwesomeIcon icon={faClock} /> Dates</a>
             {showDatePicker && (
               <div className="date-picker-popup">
                 <ResponsiveDateRangePickers />
               </div>
             )}
-            <button onClick={() => setShowAttachmentInput(!showAttachmentInput)}>Attachment</button>
-            {showAttachmentInput && (
-              <div className="attachment-input">
-                <input type="file" onChange={handleFileUpload} />
-              </div>
-            )}
-            <button>Custom Fields</button>
+            <a><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
+
+            <a><FontAwesomeIcon icon={faImage} /> Cover</a>
+
           </div>
 
           {showChecklist && (
@@ -154,16 +154,12 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle }) => {
             </div>
           )}
 
-          <h3>Automation</h3>
-          <div className='sidebar-button'>
-            <button>Add button</button>
-          </div>
 
           <h3>Actions</h3>
           <div className='sidebar-button'>
-            <button onClick={() => setShowMoveCard(true)}>Move</button>
-            <button>Archive</button>
-            <button>Share</button>
+            <a onClick={() => setShowMoveCard(true)}><FontAwesomeIcon icon={faTags} /> Move</a>
+            <a onClick={handleDeleteCard}><FontAwesomeIcon icon={faTrashAlt} /> Delete</a>
+            <a><FontAwesomeIcon icon={faPaperclip} /> Share</a>
           </div>
         </div>
 

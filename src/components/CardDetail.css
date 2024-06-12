@@ -42,11 +42,14 @@ button[type="button"] {
 }
 .modal-content h2{
   word-wrap: break-word;
-    white-space: normal;
-    clear: both;
-    font-size: 24px;
-    font-weight: 600;
-    color: #006eae;
+  white-space: normal;
+  clear: both;
+  font-size: 22px;
+  font-weight: 600;
+  color: #006eae;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
  
 .close {
@@ -162,6 +165,7 @@ button[type="button"] {
   border-radius: 4px;
   padding: 0.5rem;
   color: black;
+  resize: none;
 }
 
 .sidebar {
@@ -226,8 +230,8 @@ button[type="button"] {
   background-color: #c9302c;
 }
 
-.title-section {
-  display: flex;
+.title-section{
+  clear: both;
 }
 
 .title-section button{
@@ -253,6 +257,7 @@ button[type="button"] {
   color: black;
 }
 
+<<<<<<< HEAD
 
 
 
@@ -291,4 +296,85 @@ button[type="button"] {
 
 .attachment-input {
   margin-top: 10px;
+=======
+.modal-one {
+  /* Your modal styling */
+}
+
+.modal-content {
+  /* Your modal content styling */
+}
+
+.close {
+  /* Close button styling */
+}
+
+.title-section {
+  /* Title section styling */
+}
+
+.description {
+  /* Description section styling */
+}
+
+.sidebar {
+  /* Sidebar styling */
+}
+
+
+.sidebar-button a {
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: #0079bf;
+  background-color: #f4f5f7;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  font-size: 12px;
+  gap: 10px;
+}
+
+.sidebar-button a:hover {
+  background-color: #e1e4e9;
+}
+
+.sidebar-button a .fa {
+  margin-right: 8px;
+}
+
+.checklist {
+  /* Checklist styling */
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.checklist-item input[type="text"] {
+  flex-grow: 1;
+  margin: 0 8px;
+}
+
+.checklist-item button {
+  background-color: #eb5a46;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 12px;
+}
+
+.checklist-item button:hover {
+  background-color: #cf513d;
+}
+
+.description h3{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+>>>>>>> 232a45d876749275fd433d8af10c1efcccb96d3a
 }
