@@ -10,18 +10,28 @@
 }
 
 .list {
+<<<<<<< HEAD
   background-color: #f0f0f0;
   padding: 50px;
   border-radius: 5px;
+=======
+  padding: 10px;
+  border-radius: 2px;
+>>>>>>> aff84e67cfc29b17d0c38b4151e7b58902da9cbd
   flex: 0 0 250px;
   width: 272px;
   display: flex;
   height: 100%;
   flex-direction: column;
   white-space: normal;
-  background-color: black;
   position: relative;
-
+  background: none;
+  box-shadow: 0px 0px 2px 3px #ffffffa1;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  background: #ebf5ff;
 }
 
 .list h3 {
@@ -29,20 +39,22 @@
   /* border: 1px solid; */
   border-bottom: 3px solid white;
   padding: 11px 0px;
+  color: #006aa7;
 }
 
 .card {
-  background-color: #4c4c4c;
-  padding: 10px;
-  margin: 4px 0;
-  border-radius: 3px;
-  cursor: pointer;
-  white-space: normal; /* Ensure text wraps */
-  overflow-wrap: break-word;
+  background-color: white;
+    padding: 8px;
+    margin: 3px 0;
+    border-radius: 3px;
+    cursor: pointer;
+    /* white-space: normal; */
+    overflow-wrap: break-word;
+    color:midnightblue
 }
 
 .card:hover {
-  background-color: #5c5c5c;
+  background-color: #e0e0e0;
 }
 
 .add-card {
@@ -161,3 +173,13 @@
 .add-list-button:hover {
   background-color: #026aa7;
 }
+
+
+
+
+
+
+
+
+
+

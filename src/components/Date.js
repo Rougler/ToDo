@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { LocalizationProvider } from '@mui/x-date-pickers-pro';
 import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
-import { MobileDateRangePicker } from '@mui/x-date-pickers-pro/MobileDateRangePicker';
 import { DesktopDateRangePicker } from '@mui/x-date-pickers-pro/DesktopDateRangePicker';
 
 export default function ResponsiveDateRangePicker() {
@@ -17,23 +16,10 @@ export default function ResponsiveDateRangePicker() {
         dateAdapter={AdapterDayjs}
         localeText={{ start: 'Mobile start', end: 'Mobile end' }}
       >
-        {/* <MobileDateRangePicker
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(startProps, endProps) => (
-            <React.Fragment>
-              <TextField {...startProps} />
-              <Box sx={{ mx: 2 }}> to </Box>
-              <TextField {...endProps} />
-            </React.Fragment>
-          )}
-        /> */}
-      </LocalizationProvider>
+        </LocalizationProvider>
       <LocalizationProvider
         dateAdapter={AdapterDayjs}
-        localeText={{ start: 'Desktop start', end: 'Desktop end' }}
+        localeText={{ start: 'start', end: 'end' }}
       >
         <DesktopDateRangePicker
           value={value}

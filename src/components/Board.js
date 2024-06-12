@@ -6,7 +6,7 @@ import CardDetail from './CardDetail'; // Import the CardDetail component
 
 const initialData = [
   { id: 1, title: 'Project planning', listTitle: 'To do' },
-  { id: 2, title: 'Kickoff meeting', listTitle: 'To do' },
+  { id: 2, title: 'Kickoff Meeting', listTitle: 'To do' },
   { id: 3, title: 'sdfsdf', listTitle: 'In Progress' },
   { id: 4, title: 'fsdf', listTitle: 'In Progress' },
 ];
@@ -49,6 +49,13 @@ const Board = () => {
     const updatedCard = { ...cards[cardIndex], listTitle: newListTitle };
     const updatedCards = cards.filter(card => card.id !== cardId);
     updatedCards.splice(newPosition - 1, 0, updatedCard);
+    setCards(updatedCards);
+  };
+
+  const handleSaveTitle = (cardId, newTitle) => {
+    const updatedCards = cards.map(card => 
+      card.id === cardId ? { ...card, title: newTitle } : card
+    );
     setCards(updatedCards);
   };
 
@@ -104,6 +111,7 @@ const Board = () => {
           card={selectedCard}
           lists={lists}
           onMove={handleMoveCard}
+          onSaveTitle={handleSaveTitle} // Pass the handleSaveTitle function to CardDetail
           onClose={() => setSelectedCard(null)} // Close the CardDetail modal
         />
       )}

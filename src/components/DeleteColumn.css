@@ -49,6 +49,11 @@
   padding: 3px 6px;
   font-weight: bold;
   border: none;
-  background-color: hsl(202deg 7.31% 36.4%);
-  color: azure;
+  font-size: 12px;
+    padding: 3px 6px;
+    font-weight: bold;
+    border: none;
+    background-color: hsl(201.99deg 100% 37.45% / 39%);
+    color: azure;
 }
+ 
