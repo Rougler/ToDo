@@ -42,12 +42,14 @@ button[type="button"] {
 }
 .modal-content h2{
   word-wrap: break-word;
-    white-space: normal;
-    clear: both;
-    font-size: 24px;
-    font-weight: 600;
-    color: #006eae;
-    display: inline;
+  white-space: normal;
+  clear: both;
+  font-size: 22px;
+  font-weight: 600;
+  color: #006eae;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
  
 .close {
@@ -253,4 +255,85 @@ button[type="button"] {
 .title-section button:hover{
   background-color: #aaa;
   color: black;
+}
+
+.modal-one {
+  /* Your modal styling */
+}
+
+.modal-content {
+  /* Your modal content styling */
+}
+
+.close {
+  /* Close button styling */
+}
+
+.title-section {
+  /* Title section styling */
+}
+
+.description {
+  /* Description section styling */
+}
+
+.sidebar {
+  /* Sidebar styling */
+}
+
+
+.sidebar-button a {
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: #0079bf;
+  background-color: #f4f5f7;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  font-size: 12px;
+  gap: 10px;
+}
+
+.sidebar-button a:hover {
+  background-color: #e1e4e9;
+}
+
+.sidebar-button a .fa {
+  margin-right: 8px;
+}
+
+.checklist {
+  /* Checklist styling */
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.checklist-item input[type="text"] {
+  flex-grow: 1;
+  margin: 0 8px;
+}
+
+.checklist-item button {
+  background-color: #eb5a46;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 12px;
+}
+
+.checklist-item button:hover {
+  background-color: #cf513d;
+}
+
+.description h3{
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
