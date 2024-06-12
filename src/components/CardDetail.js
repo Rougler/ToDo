@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import './CardDetail.css';
 import MoveCard from './MoveCard'; // Import the MoveCard component
 import BasicDateRangePicker from './Date'; // Import the date picker component
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faEye, faCheckSquare, faClock, faPaperclip, faMapMarkerAlt, faImage,
+  faUser, faTags, faTrashAlt, faList, faAlignLeft, faComments, faEdit
+} from '@fortawesome/free-solid-svg-icons';
+import ResponsiveDateRangePickers from './Date';
 
 const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => {
   const [description, setDescription] = useState('');
