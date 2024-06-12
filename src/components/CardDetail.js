@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './CardDetail.css';
+import MoveCard from './MoveCard'; // Import the MoveCard component
+import BasicDateRangePicker from './Date'; // Import the date picker component
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEye, faCheckSquare, faClock, faPaperclip, faMapMarkerAlt, faImage,
   faUser, faTags, faTrashAlt, faList, faAlignLeft, faComments, faEdit
 } from '@fortawesome/free-solid-svg-icons';
-import MoveCard from './MoveCard';
 import ResponsiveDateRangePickers from './Date';
 
 const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => {
@@ -109,8 +110,8 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
             <a onClick={toggleChecklist}><FontAwesomeIcon icon={faCheckSquare} /> Checklist</a>
             <a onClick={toggleDatePicker}><FontAwesomeIcon icon={faClock} /> Dates</a>
             {showDatePicker && (
-              <div className="date-picker-popup">
-                <ResponsiveDateRangePickers />
+              <div className="date-picker-popup"> {/* Wrap the date picker in a div with a class for styling */}
+                <BasicDateRangePicker />
               </div>
             )}
             <a><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
