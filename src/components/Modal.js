@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import "./Modal.css";
+import { colors } from "@mui/material";
 
 const Modal = ({ showModal, handleClose, addTask }) => {
   const [taskName, setTaskName] = useState("");
@@ -59,7 +60,7 @@ const Modal = ({ showModal, handleClose, addTask }) => {
             />
           </div>
           <button type="submit">Add Task</button>
-          <button type="button" onClick={handleClose}>
+          <button type="button" onClick={handleClose} >
             Cancel
           </button>
         </form>
