@@ -1,23 +1,22 @@
-// ClickOutsideWrapper.js
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 const ClickOutsideWrapper = ({ onClose, children }) => {
-  const ref = useRef();
+  const wrapperRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      onClose();
+    }
+  };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        onClose();
-      }
-    };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [onClose]);
+  }, []);
 
-  return <div ref={ref}>{children}</div>;
+  return <div ref={wrapperRef}>{children}</div>;
 };
 
 export default ClickOutsideWrapper;

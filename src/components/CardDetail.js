@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import './CardDetail.css';
-import MoveCard from './MoveCard'; // Import the MoveCard component
+import ClickOutsideWrapper from './ClickOutsideWrapper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEye, faCheckSquare, faClock, faPaperclip, faMapMarkerAlt, faImage,
   faUser, faTags, faTrashAlt, faList, faAlignLeft, faComments, faEdit
 } from '@fortawesome/free-solid-svg-icons';
-// import ResponsiveDateRangePickers from './Date';
+import MoveCard from './MoveCard';
 import DateRangePicker from './date-modal';
-import ClickOutsideWrapper from './ClickOutsideWrapper'; // Import the ClickOutsideWrapper
 
-const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => {
+const colors = [
+  '#f2d600', '#ff9f1a', 'rgb(255 121 103)', '#c377e0',
+  'rgb(111 202 255)', '#00c2e0', '#51e898', '#ff78cb',
+];
+
+const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSaveCoverColor }) => {
   const [description, setDescription] = useState('');
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
@@ -21,6 +25,7 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
   const [newChecklistItem, setNewChecklistItem] = useState('');
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [title, setTitle] = useState(card.title);
+  const [showCoverOptions, setShowCoverOptions] = useState(false);
 
   const handleAddComment = () => {
     if (newComment.trim()) {
@@ -69,6 +74,10 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
     onDelete(card.id);
   };
 
+  const handleCoverColorChange = (color) => {
+    onSaveCoverColor(card.id, color);
+  };
+
   return (
     <div className="modal-one">
       <div className="modal-content">
@@ -111,16 +120,30 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
             <a onClick={toggleChecklist}><FontAwesomeIcon icon={faCheckSquare} /> Checklist</a>
             <a onClick={toggleDatePicker}><FontAwesomeIcon icon={faClock} /> Dates</a>
             {showDatePicker && (
-              <ClickOutsideWrapper onClose={() => setShowDatePicker(false)}> {/* Use ClickOutsideWrapper here */}
-                <div className="date-picker-popup"> {/* Wrap the date picker in a div with a class for styling */}
+              <div className="date-picker-popup">
+                <ClickOutsideWrapper onClose={() => setShowDatePicker(false)}>
                   <DateRangePicker />
-                </div>
-              </ClickOutsideWrapper>
+                </ClickOutsideWrapper>
+              </div>
             )}
             <a><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
-
-            <a><FontAwesomeIcon icon={faImage} /> Cover</a>
-
+            <a><FontAwesomeIcon icon={faMapMarkerAlt} /> Location</a>
+            <a><FontAwesomeIcon icon={faTags} /> Custom Fields</a>
+            <a onClick={() => setShowCoverOptions(!showCoverOptions)}><FontAwesomeIcon icon={faImage} /> Cover</a>
+            {showCoverOptions && (
+              <div className="cover-options">
+                <div className="cover-colors">
+                  {colors.map((color) => (
+                    <div
+                      key={color}
+                      className="color-option"
+                      style={{ backgroundColor: color }}
+                      onClick={() => handleCoverColorChange(color)}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {showChecklist && (
@@ -157,7 +180,6 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
               </div>
             </div>
           )}
-
 
           <h3>Actions</h3>
           <div className='sidebar-button'>
