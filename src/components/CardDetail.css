@@ -140,10 +140,6 @@ button[type="button"] {
   margin-bottom: 10px;
   cursor: pointer;
 }
-.sidebar-button{
-  gap: 12px;
-  display: flex;
-}
  
 .sidebar button:hover {
   background-color: #026aa7;
@@ -192,11 +188,6 @@ button[type="button"] {
 
 .sidebar {
   margin-top: 1rem;
-}
-
-.sidebar-button {
-  display: flex;
- 
 }
 
 .sidebar-button button {
@@ -281,29 +272,6 @@ button[type="button"] {
 
 
 
-.modal-one {
-  /* Your modal styling */
-}
-
-.modal-content {
-  /* Your modal content styling */
-}
-
-.close {
-  /* Close button styling */
-}
-
-.title-section {
-  /* Title section styling */
-}
-
-.description {
-  /* Description section styling */
-}
-
-.sidebar {
-  /* Sidebar styling */
-}
 
 
 .sidebar-button a {
@@ -316,9 +284,8 @@ button[type="button"] {
   margin-bottom: 8px;
   font-weight: 500;
   cursor: pointer;
-  display: flex;
   font-size: 12px;
-  gap: 10px;
+  margin-right: 8px;
 }
 
 .sidebar-button a:hover {
@@ -362,78 +329,77 @@ button[type="button"] {
   gap: 10px;
 }
 
-/* Description section */
-.description h3 {
+/* CardDetail.css */
+
+.modal-one {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 600px;
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.title-section {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: #333;
-  font-weight: bold;
 }
 
-/* Styling for buttons in the description section */
-.description button {
-  background-color: #007bff; /* Blue color for save button */
-  color: white; /* White text color */
-  border: none; /* No border */
-  padding: 8px 12px; /* Padding around the text */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  margin-right: 8px; /* Space between buttons */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
- 
+.title-section h2 {
+  flex-grow: 1;
+  margin-right: 10px;
 }
 
-.description button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  transform: scale(1.05); /* Slightly larger on hover */
+.edit-icon {
+  cursor: pointer;
 }
 
-.description button:active {
-  background-color: #003f7f; /* Even darker blue on active click */
-  transform: scale(1); /* Return to original size */
+.description {
+  margin-top: 20px;
 }
 
-.description button.cancel-button {
-  background-color: #dc3545; /* Red color for cancel button */
+.sidebar {
+  margin-top: 20px;
 }
 
-.description button.cancel-button:hover {
-  background-color: #c82333; /* Darker red on hover */
+.sidebar h3 {
+  margin: 18px 0px;
 }
 
-.description button.edit-button {
-  background-color: #ffc107; /* Yellow color for edit button */
-  color: #333; /* Dark text color */
+
+.cover-options {
+     margin: 27px 0px;
 }
 
-.description button.edit-button:hover {
-  background-color: #e0a800; /* Darker yellow on hover */
-}
-
-/* Styling for the description text editor */
-.description .ql-editor {
-  background-color: #fff; /* White background */
-  border: 0px  #e8e0f168; /* Light gray border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 8px; /* Padding inside the editor */
-  margin-top: 8px; /* Space above the editor */
-  color: #333; /* Dark text color */
-  box-shadow: none; /* Subtle shadow for depth */
-  /* max-width: 100% !important;
-  height: auto !important; */
-}
-.ql-editor p img {
-  max-width: 100%;
-  height: auto;
-}
-/* Aligning description buttons */
-.description .button-group {
+.cover-colors {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  margin-top: 10px;
-  
 }
 
-
-/* ss */
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}

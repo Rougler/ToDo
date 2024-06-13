@@ -1,14 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './CardDetail.css';
+import ClickOutsideWrapper from './ClickOutsideWrapper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import MoveCard from './MoveCard';
+<<<<<<< HEAD
 import ResponsiveDateRangePickers from './Date';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 
 const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => {
   const [description, setDescription] = useState(card.description || '');
+=======
+import DateRangePicker from './date-modal';
+
+const colors = [
+  '#f2d600', '#ff9f1a', 'rgb(255 121 103)', '#c377e0',
+  'rgb(111 202 255)', '#00c2e0', '#51e898', '#ff78cb',
+];
+
+const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSaveCoverColor }) => {
+  const [description, setDescription] = useState('');
+>>>>>>> 6e833ba682f908dcbca90451ef7c03b9086ae091
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [showMoveCard, setShowMoveCard] = useState(false);
@@ -18,7 +31,11 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
   const [newChecklistItem, setNewChecklistItem] = useState('');
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [title, setTitle] = useState(card.title);
+<<<<<<< HEAD
   const [isEditingDescription, setIsEditingDescription] = useState(false);
+=======
+  const [showCoverOptions, setShowCoverOptions] = useState(false);
+>>>>>>> 6e833ba682f908dcbca90451ef7c03b9086ae091
 
   const handleAddComment = () => {
     if (newComment.trim()) {
@@ -67,6 +84,7 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
     onDelete(card.id);
   };
 
+<<<<<<< HEAD
   const handleEditDescription = () => {
     setIsEditingDescription(true);
   };
@@ -85,6 +103,12 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
     setDescription(card.description || '');
   }, [card]);
 
+=======
+  const handleCoverColorChange = (color) => {
+    onSaveCoverColor(card.id, color);
+  };
+
+>>>>>>> 6e833ba682f908dcbca90451ef7c03b9086ae091
   return (
     <div className="modal-one">
       <div className="modal-content">
@@ -151,11 +175,34 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
             <a onClick={toggleDatePicker}><FontAwesomeIcon icon={faEdit} /> Dates</a>
             {showDatePicker && (
               <div className="date-picker-popup">
-                <ResponsiveDateRangePickers />
+                <ClickOutsideWrapper onClose={() => setShowDatePicker(false)}>
+                  <DateRangePicker />
+                </ClickOutsideWrapper>
               </div>
             )}
+<<<<<<< HEAD
             <a><FontAwesomeIcon icon={faEdit} /> Attachment</a>
             <a><FontAwesomeIcon icon={faEdit} /> Cover</a>
+=======
+            <a><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
+            <a><FontAwesomeIcon icon={faMapMarkerAlt} /> Location</a>
+            <a><FontAwesomeIcon icon={faTags} /> Custom Fields</a>
+            <a onClick={() => setShowCoverOptions(!showCoverOptions)}><FontAwesomeIcon icon={faImage} /> Cover</a>
+            {showCoverOptions && (
+              <div className="cover-options">
+                <div className="cover-colors">
+                  {colors.map((color) => (
+                    <div
+                      key={color}
+                      className="color-option"
+                      style={{ backgroundColor: color }}
+                      onClick={() => handleCoverColorChange(color)}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            )}
+>>>>>>> 6e833ba682f908dcbca90451ef7c03b9086ae091
           </div>
 
           {showChecklist && (
@@ -202,15 +249,19 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
         </div>
       </div>
       {showMoveCard && (
-        <MoveCard
-          card={card}
-          lists={lists}
-          onMove={(cardId, newListTitle, newPosition) => {
-            onMove(cardId, newListTitle, newPosition);
-            setShowMoveCard(false);
-          }}
-          onClose={() => setShowMoveCard(false)}
-        />
+        <ClickOutsideWrapper onClose={() => setShowMoveCard(false)}> {/* Use ClickOutsideWrapper here */}
+          <div className="move-card-popup"> {/* Add a class for styling */}
+            <MoveCard
+              card={card}
+              lists={lists}
+              onMove={(cardId, newListTitle, newPosition) => {
+                onMove(cardId, newListTitle, newPosition);
+                setShowMoveCard(false);
+              }}
+              onClose={() => setShowMoveCard(false)}
+            />
+          </div>
+        </ClickOutsideWrapper>
       )}
     </div>
   );

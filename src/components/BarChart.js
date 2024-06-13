@@ -1,28 +1,37 @@
 import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 
-const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
-const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
-const xLabels = [
-  'Page A',
-  'Page B',
-  'Page C',
-  'Page D',
-  'Page E',
-  'Page F',
-  'Page G',
-];
+const SimpleBarChart = (props) => {
+  const { tasks } = props;
 
-export default function SimpleBarChart() {
+  const taskCounts = {};
+
+  tasks.forEach((task) => {
+    task.assignedTo.forEach((person) => {
+      if (!taskCounts[person]) {
+        taskCounts[person] = {
+          "On-going": 0,
+          "Completed": 0,
+        };
+      }
+      taskCounts[person][task.taskStatus] += 1;
+    });
+  });
+
+  const dataLabels = Object.keys(taskCounts);
+  const ongoingData = dataLabels.map((label) => taskCounts[label]["On-going"]);
+  const completedData = dataLabels.map((label) => taskCounts[label]["Completed"]);
+
   return (
     <BarChart
-      width={500}
       height={300}
       series={[
-        { data: pData, label: 'pv', id: 'pvId' },
-        { data: uData, label: 'uv', id: 'uvId' },
+        { data: ongoingData, label: 'On-going', id: 'ongoingId' },
+        { data: completedData, label: 'Completed', id: 'completedId' },
       ]}
-      xAxis={[{ data: xLabels, scaleType: 'band' }]}
+      xAxis={[{ data: dataLabels, scaleType: 'band' }]}
     />
   );
-}
+};
+
+export default SimpleBarChart;
