@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import './CardDetail.css';
 import MoveCard from './MoveCard'; // Import the MoveCard component
-import BasicDateRangePicker from './Date'; // Import the date picker component
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEye, faCheckSquare, faClock, faPaperclip, faMapMarkerAlt, faImage,
   faUser, faTags, faTrashAlt, faList, faAlignLeft, faComments, faEdit
 } from '@fortawesome/free-solid-svg-icons';
-import ResponsiveDateRangePickers from './Date';
+// import ResponsiveDateRangePickers from './Date';
+import DateRangePicker from './date-modal';
+import ClickOutsideWrapper from './ClickOutsideWrapper'; // Import the ClickOutsideWrapper
 
 const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => {
   const [description, setDescription] = useState('');
@@ -110,9 +111,11 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
             <a onClick={toggleChecklist}><FontAwesomeIcon icon={faCheckSquare} /> Checklist</a>
             <a onClick={toggleDatePicker}><FontAwesomeIcon icon={faClock} /> Dates</a>
             {showDatePicker && (
-              <div className="date-picker-popup"> {/* Wrap the date picker in a div with a class for styling */}
-                <BasicDateRangePicker />
-              </div>
+              <ClickOutsideWrapper onClose={() => setShowDatePicker(false)}> {/* Use ClickOutsideWrapper here */}
+                <div className="date-picker-popup"> {/* Wrap the date picker in a div with a class for styling */}
+                  <DateRangePicker />
+                </div>
+              </ClickOutsideWrapper>
             )}
             <a><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
 
@@ -165,15 +168,19 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
         </div>
       </div>
       {showMoveCard && (
-        <MoveCard
-          card={card}
-          lists={lists}
-          onMove={(cardId, newListTitle, newPosition) => {
-            onMove(cardId, newListTitle, newPosition);
-            setShowMoveCard(false);
-          }}
-          onClose={() => setShowMoveCard(false)}
-        />
+        <ClickOutsideWrapper onClose={() => setShowMoveCard(false)}> {/* Use ClickOutsideWrapper here */}
+          <div className="move-card-popup"> {/* Add a class for styling */}
+            <MoveCard
+              card={card}
+              lists={lists}
+              onMove={(cardId, newListTitle, newPosition) => {
+                onMove(cardId, newListTitle, newPosition);
+                setShowMoveCard(false);
+              }}
+              onClose={() => setShowMoveCard(false)}
+            />
+          </div>
+        </ClickOutsideWrapper>
       )}
     </div>
   );
