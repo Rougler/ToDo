@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import './CardDetail.css';
-import MoveCard from './MoveCard'; // Import the MoveCard component
-import BasicDateRangePicker from './Date'; // Import the date picker component
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEye, faCheckSquare, faClock, faPaperclip, faMapMarkerAlt, faImage,
   faUser, faTags, faTrashAlt, faList, faAlignLeft, faComments, faEdit
 } from '@fortawesome/free-solid-svg-icons';
+import MoveCard from './MoveCard';
 import ResponsiveDateRangePickers from './Date';
 
-const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => {
+const colors = [
+  '#61bd4f', '#f2d600', '#ff9f1a', '#eb5a46', '#c377e0',
+  '#0079bf', '#00c2e0', '#51e898', '#ff78cb', '#344563'
+];
+
+const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSaveCoverColor }) => {
   const [description, setDescription] = useState('');
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
@@ -20,6 +24,7 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
   const [newChecklistItem, setNewChecklistItem] = useState('');
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [title, setTitle] = useState(card.title);
+  const [showCoverOptions, setShowCoverOptions] = useState(false);
 
   const handleAddComment = () => {
     if (newComment.trim()) {
@@ -68,6 +73,10 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
     onDelete(card.id);
   };
 
+  const handleCoverColorChange = (color) => {
+    onSaveCoverColor(card.id, color);
+  };
+
   return (
     <div className="modal-one">
       <div className="modal-content">
@@ -110,13 +119,28 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
             <a onClick={toggleChecklist}><FontAwesomeIcon icon={faCheckSquare} /> Checklist</a>
             <a onClick={toggleDatePicker}><FontAwesomeIcon icon={faClock} /> Dates</a>
             {showDatePicker && (
-              <div className="date-picker-popup"> {/* Wrap the date picker in a div with a class for styling */}
-                <BasicDateRangePicker />
+              <div className="date-picker-popup">
+                <ResponsiveDateRangePickers />
               </div>
             )}
             <a><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
-
-            <a><FontAwesomeIcon icon={faImage} /> Cover</a>
+            <a><FontAwesomeIcon icon={faMapMarkerAlt} /> Location</a>
+            <a><FontAwesomeIcon icon={faTags} /> Custom Fields</a>
+            <a onClick={() => setShowCoverOptions(!showCoverOptions)}><FontAwesomeIcon icon={faImage} /> Cover</a>
+            {showCoverOptions && (
+              <div className="cover-options">
+                <div className="cover-colors">
+                  {colors.map((color) => (
+                    <div
+                      key={color}
+                      className="color-option"
+                      style={{ backgroundColor: color }}
+                      onClick={() => handleCoverColorChange(color)}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            )}
 
           </div>
 
@@ -155,6 +179,7 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
             </div>
           )}
 
+          
 
           <h3>Actions</h3>
           <div className='sidebar-button'>

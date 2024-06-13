@@ -5,10 +5,10 @@ import DeleteColumn from './DeleteColumn';
 import CardDetail from './CardDetail';
 
 const initialData = [
-  { id: 1, title: 'Project planning', listTitle: 'To do' },
-  { id: 2, title: 'Kickoff meeting', listTitle: 'To do' },
-  { id: 3, title: 'sdfsdf', listTitle: 'In Progress' },
-  { id: 4, title: 'fsdf', listTitle: 'In Progress' },
+  { id: 1, title: 'Project planning', listTitle: 'To do', coverColor: '' },
+  { id: 2, title: 'Kickoff meeting', listTitle: 'To do', coverColor: '' },
+  { id: 3, title: 'sdfsdf', listTitle: 'In Progress', coverColor: '' },
+  { id: 4, title: 'fsdf', listTitle: 'In Progress', coverColor: '' },
 ];
 
 const initialLists = ['To do', 'In Progress', 'Done', 'Staging'];
@@ -21,104 +21,84 @@ const Board = () => {
   const [selectedCard, setSelectedCard] = useState(null);
 
   const addCard = (listTitle) => {
-    if (newCardTitle.trim()) {
-      const newCard = {
-        id: cards.length + 1,
-        title: newCardTitle,
-        listTitle: listTitle,
-      };
-      setCards([...cards, newCard]);
-      setNewCardTitle('');
-      setSelectedList('');
-    }
+    if (newCardTitle.trim() === '') return;
+
+    const newCard = {
+      id: cards.length + 1,
+      title: newCardTitle,
+      listTitle,
+      coverColor: '',
+    };
+
+    setCards([...cards, newCard]);
+    setNewCardTitle('');
+    setSelectedList('');
   };
 
-  const addList = (newListTitle) => {
-    if (!lists.includes(newListTitle)) {
-      setLists([...lists, newListTitle]);
-    }
-  };
-
-  const deleteList = (listTitle) => {
-    setLists(lists.filter((list) => list !== listTitle));
-    setCards(cards.filter((card) => card.listTitle !== listTitle));
-  };
-
-  const handleMoveCard = (cardId, newListTitle, newPosition) => {
-    const cardIndex = cards.findIndex(card => card.id === cardId);
-    const updatedCard = { ...cards[cardIndex], listTitle: newListTitle };
-    const updatedCards = cards.filter(card => card.id !== cardId);
-    updatedCards.splice(newPosition - 1, 0, updatedCard);
-    setCards(updatedCards);
-  };
-
-  const handleDeleteCard = (cardId) => {
+  const deleteCard = (cardId) => {
     setCards(cards.filter((card) => card.id !== cardId));
     setSelectedCard(null);
   };
 
-  const handleSaveTitle = (cardId, newTitle) => {
-    const updatedCards = cards.map(card =>
+  const moveCard = (cardId, newListTitle, newPosition) => {
+    const updatedCards = cards.map((card) =>
+      card.id === cardId ? { ...card, listTitle: newListTitle } : card
+    );
+    setCards(updatedCards);
+  };
+
+  const saveTitle = (cardId, newTitle) => {
+    const updatedCards = cards.map((card) =>
       card.id === cardId ? { ...card, title: newTitle } : card
+    );
+    setCards(updatedCards);
+  };
+
+  const saveCoverColor = (cardId, newColor) => {
+    const updatedCards = cards.map((card) =>
+      card.id === cardId ? { ...card, coverColor: newColor } : card
     );
     setCards(updatedCards);
   };
 
   return (
     <div className="board">
-      {lists.map((listTitle) => (
-        <div key={listTitle} className="list">
+      {lists.map((listTitle, index) => (
+        <div key={index} className="list">
+          <DeleteColumn listTitle={listTitle} />
           <div className="list-header">
-            <DeleteColumn listTitle={listTitle} onDelete={deleteList} />
             <h3>{listTitle}</h3>
           </div>
-          {cards
-            .filter((card) => card.listTitle === listTitle)
-            .map((card) => (
+          <div className="cards">
+            {cards.filter((card) => card.listTitle === listTitle).map((card) => (
               <div
                 key={card.id}
                 className="card"
                 onClick={() => setSelectedCard(card)}
+                style={{ backgroundColor: card.coverColor }}
               >
                 {card.title}
               </div>
             ))}
-          <div className="add-card-section">
-            {selectedList === listTitle && (
-              <textarea
-                placeholder="Card title"
-                value={newCardTitle}
-                onChange={(e) => setNewCardTitle(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    addCard(listTitle);
-                  }
-                }}
-              />
-            )}
-            <button
-              className="add-card"
-              onClick={() =>
-                selectedList === listTitle
-                  ? addCard(listTitle)
-                  : setSelectedList(listTitle)
-              }
-            >
-              + Add a card
-            </button>
           </div>
+          <AddListForm
+            listTitle={listTitle}
+            addCard={addCard}
+            newCardTitle={newCardTitle}
+            setNewCardTitle={setNewCardTitle}
+            setSelectedList={setSelectedList}
+          />
         </div>
       ))}
-      <AddListForm onAddList={addList} />
-
       {selectedCard && (
         <CardDetail
           card={selectedCard}
           lists={lists}
-          onMove={handleMoveCard}
+          onMove={moveCard}
           onClose={() => setSelectedCard(null)}
-          onDelete={handleDeleteCard}
-          onSaveTitle={handleSaveTitle} // Pass the handleSaveTitle function
+          onSaveTitle={saveTitle}
+          onDelete={deleteCard}
+          onSaveCoverColor={saveCoverColor}
         />
       )}
     </div>

@@ -140,10 +140,6 @@ button[type="button"] {
   margin-bottom: 10px;
   cursor: pointer;
 }
-.sidebar-button{
-  gap: 12px;
-  display: flex;
-}
  
 .sidebar button:hover {
   background-color: #026aa7;
@@ -170,11 +166,6 @@ button[type="button"] {
 
 .sidebar {
   margin-top: 1rem;
-}
-
-.sidebar-button {
-  display: flex;
- 
 }
 
 .sidebar-button button {
@@ -257,29 +248,8 @@ button[type="button"] {
   color: black;
 }
 
-.modal-one {
-  /* Your modal styling */
-}
 
-.modal-content {
-  /* Your modal content styling */
-}
 
-.close {
-  /* Close button styling */
-}
-
-.title-section {
-  /* Title section styling */
-}
-
-.description {
-  /* Description section styling */
-}
-
-.sidebar {
-  /* Sidebar styling */
-}
 
 
 .sidebar-button a {
@@ -292,9 +262,8 @@ button[type="button"] {
   margin-bottom: 8px;
   font-weight: 500;
   cursor: pointer;
-  display: flex;
   font-size: 12px;
-  gap: 10px;
+  margin-right: 8px;
 }
 
 .sidebar-button a:hover {
@@ -336,4 +305,79 @@ button[type="button"] {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+/* CardDetail.css */
+
+.modal-one {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 600px;
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+}
+
+.title-section h2 {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.edit-icon {
+  cursor: pointer;
+}
+
+.description {
+  margin-top: 20px;
+}
+
+.sidebar {
+  margin-top: 20px;
+}
+
+.sidebar h3 {
+  margin: 18px 0px;
+}
+
+
+.cover-options {
+     margin: 27px 0px;
+}
+
+.cover-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
 }
