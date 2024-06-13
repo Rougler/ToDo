@@ -5,10 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-<<<<<<< HEAD
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
-=======
->>>>>>> 232a45d876749275fd433d8af10c1efcccb96d3a
+
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/material": "^5.15.19",

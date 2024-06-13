@@ -257,7 +257,7 @@ button[type="button"] {
   color: black;
 }
 
-<<<<<<< HEAD
+
 
 
 
@@ -296,7 +296,7 @@ button[type="button"] {
 
 .attachment-input {
   margin-top: 10px;
-=======
+}
 .modal-one {
   /* Your modal styling */
 }
@@ -376,5 +376,5 @@ button[type="button"] {
   display: flex;
   align-items: center;
   gap: 10px;
->>>>>>> 232a45d876749275fd433d8af10c1efcccb96d3a
+
 }

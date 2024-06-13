@@ -163,18 +163,6 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
             <a><FontAwesomeIcon icon={faPaperclip} /> Share</a>
           </div>
         </div>
-
-        {attachments.length > 0 && (
-          <div className="attachments">
-            <h3>Attachments</h3>
-            {attachments.map((attachment, index) => (
-              <div key={index} className="attachment">
-                <FontAwesomeIcon icon={faPaperclip} />
-                <span>{attachment.name}</span>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
       {showMoveCard && (
         <MoveCard
