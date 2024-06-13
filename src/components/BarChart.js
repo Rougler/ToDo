@@ -24,7 +24,6 @@ const SimpleBarChart = (props) => {
 
   return (
     <BarChart
-      width={500}
       height={300}
       series={[
         { data: ongoingData, label: 'On-going', id: 'ongoingId' },
