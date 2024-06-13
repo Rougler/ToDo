@@ -26,8 +26,7 @@ const Board = () => {
     const newCard = {
       id: cards.length + 1,
       title: newCardTitle,
-      listTitle,
-      coverColor: '',
+      listTitle: listTitle,
     };
 
     setCards([...cards, newCard]);
@@ -38,9 +37,9 @@ const Board = () => {
   const deleteCard = (cardId) => {
     setCards(cards.filter((card) => card.id !== cardId));
     setSelectedCard(null);
-  };
+  };        
 
-  const moveCard = (cardId, newListTitle, newPosition) => {
+  const moveCard = (cardId, newListTitle) => {
     const updatedCards = cards.map((card) =>
       card.id === cardId ? { ...card, listTitle: newListTitle } : card
     );
@@ -61,12 +60,38 @@ const Board = () => {
     setCards(updatedCards);
   };
 
+  const addList = (listTitle) => {
+    if (listTitle.trim() === '') return;
+    setLists([...lists, listTitle]);
+  };
+
+  const deleteList = (listTitle) => {
+    setLists(lists.filter((list) => list !== listTitle));
+    setCards(cards.filter((card) => card.listTitle !== listTitle));
+  };
+
+  const handleMoveCard = (cardId, newListTitle) => {
+    moveCard(cardId, newListTitle);
+  };
+
+  const handleDeleteCard = (cardId) => {
+    deleteCard(cardId);
+  };
+
+  const handleSaveTitle = (cardId, newTitle) => {
+    saveTitle(cardId, newTitle);
+  };
+
+  const handleSaveCoverColor = (cardId, newColor) => {
+    saveCoverColor(cardId, newColor);
+  };
+
   return (
     <div className="board">
       {lists.map((listTitle, index) => (
         <div key={index} className="list">
-          <DeleteColumn listTitle={listTitle} />
           <div className="list-header">
+          <DeleteColumn listTitle={listTitle} onDelete={deleteList} />
             <h3>{listTitle}</h3>
           </div>
           <div className="cards">
@@ -81,24 +106,43 @@ const Board = () => {
               </div>
             ))}
           </div>
-          <AddListForm
-            listTitle={listTitle}
-            addCard={addCard}
-            newCardTitle={newCardTitle}
-            setNewCardTitle={setNewCardTitle}
-            setSelectedList={setSelectedList}
-          />
+          <div className="add-card-section">
+            {selectedList === listTitle && (
+              <textarea
+                placeholder="Card title"
+                value={newCardTitle}
+                onChange={(e) => setNewCardTitle(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    addCard(listTitle);
+                  }
+                }}
+              />
+            )}
+            <button
+              className="add-card"
+              onClick={() =>
+                selectedList === listTitle
+                  ? addCard(listTitle)
+                  : setSelectedList(listTitle)
+              }
+            >
+              + Add a card
+            </button>
+          </div>
         </div>
       ))}
+      <AddListForm onAddList={addList} />
+
       {selectedCard && (
         <CardDetail
           card={selectedCard}
           lists={lists}
-          onMove={moveCard}
+          onMove={handleMoveCard}
           onClose={() => setSelectedCard(null)}
-          onSaveTitle={saveTitle}
-          onDelete={deleteCard}
-          onSaveCoverColor={saveCoverColor}
+          onDelete={handleDeleteCard}
+          onSaveTitle={handleSaveTitle}
+          onSaveCoverColor={handleSaveCoverColor}
         />
       )}
     </div>

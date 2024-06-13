@@ -9,8 +9,8 @@ import MoveCard from './MoveCard';
 import ResponsiveDateRangePickers from './Date';
 
 const colors = [
-  '#61bd4f', '#f2d600', '#ff9f1a', '#eb5a46', '#c377e0',
-  '#0079bf', '#00c2e0', '#51e898', '#ff78cb', '#344563'
+  '#f2d600', '#ff9f1a', 'rgb(255 121 103)', '#c377e0',
+  'rgb(111 202 255)', '#00c2e0', '#51e898', '#ff78cb',
 ];
 
 const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSaveCoverColor }) => {
@@ -141,7 +141,6 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
                 </div>
               </div>
             )}
-
           </div>
 
           {showChecklist && (
@@ -178,8 +177,6 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
               </div>
             </div>
           )}
-
-          
 
           <h3>Actions</h3>
           <div className='sidebar-button'>
