@@ -10,14 +10,13 @@
 }
 
 .list {
-<<<<<<< HEAD
+
   background-color: #f0f0f0;
   padding: 50px;
   border-radius: 5px;
-=======
+
   padding: 10px;
   border-radius: 2px;
->>>>>>> aff84e67cfc29b17d0c38b4151e7b58902da9cbd
   flex: 0 0 250px;
   width: 272px;
   display: flex;

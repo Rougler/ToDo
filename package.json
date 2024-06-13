@@ -5,10 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-<<<<<<< HEAD
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
-=======
->>>>>>> 232a45d876749275fd433d8af10c1efcccb96d3a
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/material": "^5.15.19",
@@ -22,6 +19,7 @@
     "dayjs": "^1.11.11",
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
