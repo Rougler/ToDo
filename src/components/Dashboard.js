@@ -10,29 +10,17 @@ const Dashboard = () => {
     {
       taskName: "To-Do Application",
       taskStatus: "On-going",
-<<<<<<< HEAD
       assignedTo: ["Swati", "Nitish", "SK Bains", "Bishes", "Subrat"], // Convert string to array
-=======
-      assignedTo: ["Swati", "Nitish", "SK Bains", "Bitnes", "Subrat"],
->>>>>>> 6e833ba682f908dcbca90451ef7c03b9086ae091
     },
     {
       taskName: "Cloud OptGen",
       taskStatus: "On-going",
-<<<<<<< HEAD
       assignedTo: ["Swati", "Nitish", "SK Bains", "Bishes", "Subrat"], // Convert string to array
-=======
-      assignedTo: ["Swati", "Nitish", "SK Bains", "Bitnes", "Subrat"],
->>>>>>> 6e833ba682f908dcbca90451ef7c03b9086ae091
     },
     {
       taskName: "CSPM",
       taskStatus: "Completed",
-<<<<<<< HEAD
       assignedTo: ["Swati", "Nitish", "SK Bains", "Bishes", "Subrat"], // Convert string to array
-=======
-      assignedTo: ["Swati", "Nitish", "SK Bains", "Bitnes", "Subrat"],
->>>>>>> 6e833ba682f908dcbca90451ef7c03b9086ae091
     },
   ]);
 
