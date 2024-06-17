@@ -285,7 +285,7 @@ button[type="button"] {
 }
 
 .attachment {
-  display: flex;
+  
   align-items: center;
   margin-bottom: 10px;
 }
@@ -297,29 +297,10 @@ button[type="button"] {
 .attachment-input {
   margin-top: 10px;
 }
-.modal-one {
-  /* Your modal styling */
-}
 
-.modal-content {
-  /* Your modal content styling */
-}
 
-.close {
-  /* Close button styling */
-}
 
-.title-section {
-  /* Title section styling */
-}
 
-.description {
-  /* Description section styling */
-}
-
-.sidebar {
-  /* Sidebar styling */
-}
 
 
 .sidebar-button a {
@@ -345,9 +326,7 @@ button[type="button"] {
   margin-right: 8px;
 }
 
-.checklist {
-  /* Checklist styling */
-}
+
 
 .checklist-item {
   display: flex;

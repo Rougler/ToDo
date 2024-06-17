@@ -7,7 +7,6 @@ import {
   faEye, faCheckSquare, faClock, faPaperclip, faMapMarkerAlt, faImage,
   faUser, faTags, faTrashAlt, faList, faAlignLeft, faComments, faEdit
 } from '@fortawesome/free-solid-svg-icons';
-import ResponsiveDateRangePickers from './Date';
 
 const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => {
   const [description, setDescription] = useState('');
@@ -16,10 +15,12 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
   const [showMoveCard, setShowMoveCard] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showChecklist, setShowChecklist] = useState(false);
+  const [showAttachment, setShowAttachment] = useState(false); // State for showing attachment section
   const [checklistItems, setChecklistItems] = useState([]);
   const [newChecklistItem, setNewChecklistItem] = useState('');
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [title, setTitle] = useState(card.title);
+  const [attachments, setAttachments] = useState([]);
 
   const handleAddComment = () => {
     if (newComment.trim()) {
@@ -34,6 +35,10 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
 
   const toggleChecklist = () => {
     setShowChecklist(!showChecklist);
+  };
+
+  const toggleAttachment = () => {
+    setShowAttachment(!showAttachment);
   };
 
   const handleAddChecklistItem = () => {
@@ -66,6 +71,15 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
 
   const handleDeleteCard = () => {
     onDelete(card.id);
+  };
+
+  const handleFileChange = (event) => {
+    const files = Array.from(event.target.files);
+    setAttachments([...attachments, ...files]);
+  };
+
+  const handleDeleteAttachment = (index) => {
+    setAttachments(attachments.filter((_, i) => i !== index));
   };
 
   return (
@@ -114,10 +128,8 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
                 <BasicDateRangePicker />
               </div>
             )}
-            <a><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
-
+            <a onClick={toggleAttachment}><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
             <a><FontAwesomeIcon icon={faImage} /> Cover</a>
-
           </div>
 
           {showChecklist && (
@@ -155,6 +167,22 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete }) => 
             </div>
           )}
 
+          {showAttachment && (
+            <div className="attachment">
+              <h3>Attach a file</h3>
+              <input
+                type="file"
+                onChange={handleFileChange}
+                multiple
+              />
+              {attachments.map((attachment, index) => (
+                <div key={index} className="attachment-item">
+                  <span>{attachment.name}</span>
+                  <button onClick={() => handleDeleteAttachment(index)}>Delete</button>
+                </div>
+              ))}
+            </div>
+          )}
 
           <h3>Actions</h3>
           <div className='sidebar-button'>
