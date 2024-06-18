@@ -30,7 +30,7 @@
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%;
+    width: 100%;
     border-radius: 5px;
     text-align: left;
     position: relative;
@@ -177,7 +177,7 @@ button[type="button"] {
 }
 
 .description textarea {
-  width: 100%;
+  width: 500%;
   height: 5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -347,7 +347,7 @@ button[type="button"] {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  width: 600px;
+  width: 50%;
   max-height: 90%;
   overflow-y: auto;
 }
@@ -403,3 +403,83 @@ button[type="button"] {
   border-radius: 5px;
   cursor: pointer;
 }
+
+/* Description section */
+.description h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Styling for buttons in the description section */
+.description button {
+  background-color: #007bff; /* Blue color for save button */
+  color: white; /* White text color */
+  border: none; /* No border */
+  padding: 8px 12px; /* Padding around the text */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-right: 8pxpx; /* Space between buttons */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+ 
+}
+
+.description button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
+}
+
+.description button:active {
+  background-color: #003f7f; /* Even darker blue on active click */
+  transform: scale(1); /* Return to original size */
+}
+
+.description button.cancel-button {
+  background-color: #dc3545; /* Red color for cancel button */
+}
+
+.description button.cancel-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+.description button.edit-button {
+ position: absolute;
+ right: 313px;
+ top: 62px;
+ 
+}
+ 
+ 
+
+
+
+.description button.edit-button:hover {
+  background-color: #e0a800; /* Darker yellow on hover */
+}
+
+/* Styling for the description text editor */
+.description .ql-editor {
+  background-color: #fff; /* White background */
+  border:0px; /* Light gray border */
+  border-radius: 16px; /* Rounded corners */
+  padding: 16px; /* Padding inside the editor */
+  margin-top: 10px; /* Space above the editor */
+  color: #333; /* Dark text color */
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+ 
+}
+
+.description .ql-editor img{
+  width: 100%;
+}
+
+/* Aligning description buttons */
+.description .button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+ 
+}
+
