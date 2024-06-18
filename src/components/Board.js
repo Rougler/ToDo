@@ -5,10 +5,10 @@ import DeleteColumn from './DeleteColumn';
 import CardDetail from './CardDetail';
 
 const initialData = [
-  { id: 1, title: 'Project planning', listTitle: 'To do' },
-  { id: 2, title: 'Kickoff meeting', listTitle: 'To do' },
-  { id: 3, title: 'sdfsdf', listTitle: 'In Progress' },
-  { id: 4, title: 'fsdf', listTitle: 'In Progress' },
+  { id: 1, title: 'Project planning', listTitle: 'To do', coverColor: '' },
+  { id: 2, title: 'Kickoff meeting', listTitle: 'To do', coverColor: '' },
+  { id: 3, title: 'sdfsdf', listTitle: 'In Progress', coverColor: '' },
+  { id: 4, title: 'fsdf', listTitle: 'In Progress', coverColor: '' },
 ];
 
 const initialLists = ['To do', 'In Progress', 'Done', 'Staging'];
@@ -21,22 +21,48 @@ const Board = () => {
   const [selectedCard, setSelectedCard] = useState(null);
 
   const addCard = (listTitle) => {
-    if (newCardTitle.trim()) {
-      const newCard = {
-        id: cards.length + 1,
-        title: newCardTitle,
-        listTitle: listTitle,
-      };
-      setCards([...cards, newCard]);
-      setNewCardTitle('');
-      setSelectedList('');
-    }
+    if (newCardTitle.trim() === '') return;
+
+    const newCard = {
+      id: cards.length + 1,
+      title: newCardTitle,
+      listTitle: listTitle,
+    };
+
+    setCards([...cards, newCard]);
+    setNewCardTitle('');
+    setSelectedList('');
   };
 
-  const addList = (newListTitle) => {
-    if (!lists.includes(newListTitle)) {
-      setLists([...lists, newListTitle]);
-    }
+  const deleteCard = (cardId) => {
+    setCards(cards.filter((card) => card.id !== cardId));
+    setSelectedCard(null);
+  };
+
+  const moveCard = (cardId, newListTitle) => {
+    const updatedCards = cards.map((card) =>
+      card.id === cardId ? { ...card, listTitle: newListTitle } : card
+    );
+    setCards(updatedCards);
+  };
+
+  const saveTitle = (cardId, newTitle) => {
+    const updatedCards = cards.map((card) =>
+      card.id === cardId ? { ...card, title: newTitle } : card
+    );
+    setCards(updatedCards);
+  };
+
+  const saveCoverColor = (cardId, newColor) => {
+    const updatedCards = cards.map((card) =>
+      card.id === cardId ? { ...card, coverColor: newColor } : card
+    );
+    setCards(updatedCards);
+  };
+
+  const addList = (listTitle) => {
+    if (listTitle.trim() === '') return;
+    setLists([...lists, listTitle]);
   };
 
   const deleteList = (listTitle) => {
@@ -44,45 +70,53 @@ const Board = () => {
     setCards(cards.filter((card) => card.listTitle !== listTitle));
   };
 
-  const handleMoveCard = (cardId, newListTitle, newPosition) => {
-    const cardIndex = cards.findIndex(card => card.id === cardId);
-    const updatedCard = { ...cards[cardIndex], listTitle: newListTitle };
-    const updatedCards = cards.filter(card => card.id !== cardId);
-    updatedCards.splice(newPosition - 1, 0, updatedCard);
-    setCards(updatedCards);
+  const handleMoveCard = (cardId, newListTitle) => {
+    moveCard(cardId, newListTitle);
   };
 
   const handleDeleteCard = (cardId) => {
-    setCards(cards.filter((card) => card.id !== cardId));
-    setSelectedCard(null);
+    deleteCard(cardId);
   };
 
   const handleSaveTitle = (cardId, newTitle) => {
-    const updatedCards = cards.map(card =>
-      card.id === cardId ? { ...card, title: newTitle } : card
-    );
+    saveTitle(cardId, newTitle);
+  };
+
+  const handleSaveCoverColor = (cardId, newColor) => {
+    saveCoverColor(cardId, newColor);
+  };
+
+  const handleCopyCard = (card) => {
+    const newCard = { ...card, id: cards.length + 1, title: `${card.title} (Copy)` };
+    const index = cards.findIndex(c => c.id === card.id);
+    const updatedCards = [
+      ...cards.slice(0, index + 1),
+      newCard,
+      ...cards.slice(index + 1)
+    ];
     setCards(updatedCards);
   };
 
   return (
     <div className="board">
-      {lists.map((listTitle) => (
-        <div key={listTitle} className="list">
+      {lists.map((listTitle, index) => (
+        <div key={index} className="list">
           <div className="list-header">
             <DeleteColumn listTitle={listTitle} onDelete={deleteList} />
             <h3>{listTitle}</h3>
           </div>
-          {cards
-            .filter((card) => card.listTitle === listTitle)
-            .map((card) => (
+          <div className="cards">
+            {cards.filter((card) => card.listTitle === listTitle).map((card) => (
               <div
                 key={card.id}
                 className="card"
                 onClick={() => setSelectedCard(card)}
+                style={{ backgroundColor: card.coverColor }}
               >
                 {card.title}
               </div>
             ))}
+          </div>
           <div className="add-card-section">
             {selectedList === listTitle && (
               <textarea
@@ -118,7 +152,9 @@ const Board = () => {
           onMove={handleMoveCard}
           onClose={() => setSelectedCard(null)}
           onDelete={handleDeleteCard}
-          onSaveTitle={handleSaveTitle} // Pass the handleSaveTitle function
+          onSaveTitle={handleSaveTitle}
+          onSaveCoverColor={handleSaveCoverColor}
+          onCopyCard={handleCopyCard}
         />
       )}
     </div>

@@ -1,16 +1,22 @@
-import React from 'react';
-import './Modal.css';
-import ResponsiveDateRangePickers from "./Date.js";
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-const Datemodal = ({ onClose }) => {
-  return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <span className="close" onClick={onClose}>&times;</span>
-        <ResponsiveDateRangePickers />
-      </div>
-    </div>
-  );
-};
+const DateRangePicker = () => {
+    const [dateRange, setDateRange] = useState([null, null]);
+    const [startDate, endDate] = dateRange;
+    return (
+      <DatePicker
+        selectsRange={true}
+        startDate={startDate}
+        endDate={endDate}
+        onChange={(update) => {
+          setDateRange(update);
+        }}
+        isClearable={true}
+      />
+    );
+  };
 
-export default Datemodal;
+
+export default DateRangePicker;

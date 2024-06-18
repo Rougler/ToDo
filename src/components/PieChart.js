@@ -3,16 +3,19 @@ import { PieChart } from '@mui/x-charts/PieChart';
 
 const StraightAnglePieChart = ({ data }) => {
   const chartData = [
-    { label: 'On-going', value: data['On-going'], color: 'blue' },
-    { label: 'Completed', value: data['Completed' ],color: 'green' },
+    { label: 'On-going', value: data['On-going'] }, //, color: 'green'
+    { label: 'Completed', value: data['Completed'] }, //, color: 'green'
   ];
-<style>
-  
-</style>
+
   return (
     <PieChart
       series={[
-        { data: chartData },
+        {
+          data: chartData,
+          paddingAngle: 5,
+          innerRadius: 80,
+          outerRadius: 150,
+        },
       ]}
       height={300}
     />

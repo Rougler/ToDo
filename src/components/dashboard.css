@@ -9,24 +9,28 @@
   
   h1 {
     text-align: left;
-    padding: 20px;
+    padding: 1px;
     background: rgb(35 100 139);
     color: white;
+    font-size: 28px;
+    font-weight: 500;
+    padding-left: 26px;
   }
   
   .charts {
     display: flex;
-    gap: 35px;
+    gap: 17px;
     /* justify-content: space-between; */
     margin-bottom: 28px;
-    margin: 25px;
+    margin: 20px 25px;
   }
   
   .chart {
     width: 46%;
     background: white;
     padding: 20px;
-    box-shadow: 0px 0px 4px 0px gray; }
+    box-shadow: 0px 0px 4px 0px #d4d1d1;
+    border-radius: 5px;}
   
   .pie-chart img,
   .bar-chart img {
@@ -35,11 +39,12 @@
   }
   
   .task-section {
-    padding: 20px;
+    padding: 18px;
     /* width: 100%; */
     /* overflow: hidden; */
-    box-shadow: 0px 0px 4px 0px gray;
-    margin: 25px;
+    box-shadow: 0px 0px 4px 0px #d4d1d1;
+    border-radius: 5px;
+    margin: 0px 27px;
     background: white;
   }
   
@@ -48,7 +53,8 @@
     align-items: center;
     margin-bottom: 20px;
     padding: 12px;
-    background: #dddddd;
+    background: #ebebeb;
+    border-radius: 3px;
   }
   
   .add-task-button {
@@ -75,13 +81,16 @@
   
   .task-table th,
   .task-table td {
-    border: 1px solid #ddd;
+    border: 1px solid #216ba552;
     padding: 8px;
     text-align: left;
   }
+
+
+
   
   .task-table th {
-    background-color: #f2f2f2;
+    background-color: #0079bf54;
   }
   
   .ongoing {
