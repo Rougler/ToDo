@@ -37,7 +37,7 @@ const Board = () => {
   const deleteCard = (cardId) => {
     setCards(cards.filter((card) => card.id !== cardId));
     setSelectedCard(null);
-  };        
+  };
 
   const moveCard = (cardId, newListTitle) => {
     const updatedCards = cards.map((card) =>
@@ -86,12 +86,23 @@ const Board = () => {
     saveCoverColor(cardId, newColor);
   };
 
+  const handleCopyCard = (card) => {
+    const newCard = { ...card, id: cards.length + 1, title: `${card.title} (Copy)` };
+    const index = cards.findIndex(c => c.id === card.id);
+    const updatedCards = [
+      ...cards.slice(0, index + 1),
+      newCard,
+      ...cards.slice(index + 1)
+    ];
+    setCards(updatedCards);
+  };
+
   return (
     <div className="board">
       {lists.map((listTitle, index) => (
         <div key={index} className="list">
           <div className="list-header">
-          <DeleteColumn listTitle={listTitle} onDelete={deleteList} />
+            <DeleteColumn listTitle={listTitle} onDelete={deleteList} />
             <h3>{listTitle}</h3>
           </div>
           <div className="cards">
@@ -143,6 +154,7 @@ const Board = () => {
           onDelete={handleDeleteCard}
           onSaveTitle={handleSaveTitle}
           onSaveCoverColor={handleSaveCoverColor}
+          onCopyCard={handleCopyCard}
         />
       )}
     </div>
