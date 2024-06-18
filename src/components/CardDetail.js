@@ -159,7 +159,7 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
                 </div>
               )}
               <a onClick={toggleAttachment}><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
-              <a onClick={handleCopyCard}><FontAwesomeIcon icon={faCopy} /> Copy</a>
+              
               
               <a><FontAwesomeIcon icon={faTags} /> Custom Fields</a>
               <a onClick={() => setShowCoverOptions(!showCoverOptions)}><FontAwesomeIcon icon={faImage} /> Cover</a>
