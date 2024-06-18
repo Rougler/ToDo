@@ -47,7 +47,6 @@ button[type="button"] {
   font-size: 22px;
   font-weight: 600;
   color: #006eae;
-  display: flex;
   align-items: center;
   gap: 10px;
 }
@@ -252,11 +251,7 @@ button[type="button"] {
 
 
 
-.title-section {
-  display: flex;
-  align-items: center;
- 
-}
+
 
 .edit-icon {
   cursor: pointer;
@@ -386,10 +381,7 @@ button[type="button"] {
   cursor: pointer;
 }
 
-.title-section {
-  display: flex;
-  align-items: center;
-}
+
 
 .title-section h2 {
   flex-grow: 1;

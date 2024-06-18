@@ -19,8 +19,8 @@
   
   .charts {
     display: flex;
-    gap: 17px;
-    /* justify-content: space-between; */
+    /* gap: 17px; */
+    justify-content: space-between;
     margin-bottom: 28px;
     margin: 20px 25px;
   }
