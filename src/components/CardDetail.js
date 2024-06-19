@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CardDetail.css';
-import OutsideClickHandler from './OutsideClickHandler';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import OutsideClickHandler from './OutsideClickHandler';
+import MoveCard from './MoveCard';
+import ResponsiveDateRangePickers from './Date';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 import {
   faEye, faCheckSquare, faClock, faPaperclip, faMapMarkerAlt, faImage,
   faUser, faTags, faTrashAlt, faList, faAlignLeft, faComments, faEdit, faDownload, faCopy
 } from '@fortawesome/free-solid-svg-icons';
-import MoveCard from './MoveCard';
 import DateRangePicker from './date-modal';
-
-const colors = [
-  '#f2d600', '#ff9f1a', 'rgb(255 121 103)', '#c377e0',
-  'rgb(111 202 255)', '#00c2e0', '#51e898', '#ff78cb',
-];
-
-const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSaveCoverColor, onCopyCard }) => {
-  const [description, setDescription] = useState('');
+const CardDetail = ({
+  card,
+  lists,
+  onMove,
+  onClose,
+  onSaveTitle,
+  onDelete,
+  onCopyCard,
+  onSaveCoverColor,
+}) => {
+  const [description, setDescription] = useState(card.description || '');
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [showMoveCard, setShowMoveCard] = useState(false);
@@ -25,9 +31,21 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
   const [checklistItems, setChecklistItems] = useState([]);
   const [newChecklistItem, setNewChecklistItem] = useState('');
   const [isEditingTitle, setIsEditingTitle] = useState(false);
-  const [title, setTitle] = useState(card.title);
+  const [title, setTitle] = useState(card.title || '');
+  const [isEditingDescription, setIsEditingDescription] = useState(false);
   const [showCoverOptions, setShowCoverOptions] = useState(false);
   const [attachments, setAttachments] = useState([]);
+
+  const colors = [
+    '#f2d600',
+    '#ff9f1a',
+    'rgb(255 121 103)',
+    '#c377e0',
+    'rgb(111 202 255)',
+    '#00c2e0',
+    '#51e898',
+    '#ff78cb',
+  ];
 
   const handleAddComment = () => {
     if (newComment.trim()) {
@@ -80,17 +98,23 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
     onDelete(card.id);
   };
 
-  const handleCoverColorChange = (color) => {
-    onSaveCoverColor(card.id, color);
+  const handleEditDescription = () => {
+    setIsEditingDescription(true);
+  };
+
+  const handleSaveDescription = () => {
+    card.description = description; // Save the description to the card
+    setIsEditingDescription(false);
+  };
+
+  const handleCancelEdit = () => {
+    setDescription(card.description || '');
+    setIsEditingDescription(false);
   };
 
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
     setAttachments([...attachments, ...files]);
-  };
-
-  const handleDeleteAttachment = (index) => {
-    setAttachments(attachments.filter((_, i) => i !== index));
   };
 
   const handleDownloadAttachment = (file) => {
@@ -109,11 +133,29 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
     onClose();
   };
 
+  const handleCoverColorChange = (color) => {
+    onSaveCoverColor(card.id, color);
+    setShowCoverOptions(false);
+  };
+  const handleDeleteAttachment = (index) => {
+    setAttachments(attachments.filter((_, i) => i !== index));
+  };
+
+  useEffect(() => {
+    setDescription(card.description || '');
+    setTitle(card.title || '');
+    setChecklistItems(card.checklistItems || []);
+    setComments(card.comments || []);
+    setAttachments(card.attachments || []);
+  }, [card]);
+
   return (
     <div className="modal-one">
       <OutsideClickHandler onClose={onClose}>
         <div className="modal-content">
-          <span className="close" onClick={onClose}>&times;</span>
+          <span className="close" onClick={onClose}>
+            &times;
+          </span>
 
           <div className="title-section">
             {isEditingTitle ? (
@@ -132,37 +174,67 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
                 />
               </h2>
             )}
-            {isEditingTitle && (
-              <button onClick={handleSaveTitle}>Save</button>
-            )}
+            {isEditingTitle && <button className='save-button' onClick={handleSaveTitle}>Save</button>}
           </div>
 
           <div className="description">
-            <h3><FontAwesomeIcon icon={faAlignLeft} /> Description</h3>
-            <textarea
-              placeholder="Add a more detailed description..."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
+            <div className="description-header">
+              <h3>Description</h3>
+              {!isEditingDescription && (
+                <button className="edit-button" onClick={handleEditDescription}>
+                  Edit
+                </button>
+              )}
+            </div>
+            {isEditingDescription ? (
+              <div>
+                <ReactQuill
+                  value={description}
+                  onChange={setDescription}
+                  modules={{
+                    toolbar: [
+                      [{ header: '1' }, { header: '2' }, { font: [] }],
+                      [{ size: [] }],
+                      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                      [{ list: 'ordered' }, { list: 'bullet' }],
+                      ['link', 'image', 'video'],
+                      ['clean'],
+                    ],
+                  }}
+                />
+                <button className="save-button" onClick={handleSaveDescription}>Save</button>
+                <button className="cancel-button" onClick={handleCancelEdit}>Cancel</button>
+              </div>
+            ) : (
+              <div>
+                <div
+                  className="ql-editor"
+                  dangerouslySetInnerHTML={{ __html: description }}
+                ></div>
+              </div>
+            )}
           </div>
 
           <div className="sidebar">
             <h3>Add to card</h3>
-            <div className='sidebar-button'>
-              <a onClick={toggleChecklist}><FontAwesomeIcon icon={faCheckSquare} /> Checklist</a>
-              <a onClick={toggleDatePicker}><FontAwesomeIcon icon={faClock} /> Dates</a>
+            <div className="sidebar-button">
+              <a onClick={toggleChecklist}>
+                <FontAwesomeIcon icon={faEdit} /> Checklist
+              </a>
+              <a onClick={toggleDatePicker}>
+                <FontAwesomeIcon icon={faEdit} /> Dates
+              </a>
               {showDatePicker && (
                 <div className="date-picker-popup">
-                  <OutsideClickHandler onClose={() => setShowDatePicker(false)}>
-                    <DateRangePicker />
-                  </OutsideClickHandler>
+                  <ResponsiveDateRangePickers />
                 </div>
               )}
-              <a onClick={toggleAttachment}><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
-              <a onClick={handleCopyCard}><FontAwesomeIcon icon={faCopy} /> Copy</a>
-              
-              <a><FontAwesomeIcon icon={faTags} /> Custom Fields</a>
-              <a onClick={() => setShowCoverOptions(!showCoverOptions)}><FontAwesomeIcon icon={faImage} /> Cover</a>
+              <a onClick={toggleAttachment}>
+                <FontAwesomeIcon icon={faEdit} /> Attachment
+              </a>
+              <a onClick={() => setShowCoverOptions(!showCoverOptions)}>
+                <FontAwesomeIcon icon={faEdit} /> Cover
+              </a>
               {showCoverOptions && (
                 <div className="cover-options">
                   <div className="cover-colors">
@@ -189,12 +261,10 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
                       checked={item.completed}
                       onChange={() => handleToggleChecklistItem(index)}
                     />
-                    <input
-                      type="text"
-                      value={item.text}
-                      readOnly
-                    />
-                    <button onClick={() => handleDeleteChecklistItem(index)}>Delete</button>
+                    <input type="text" value={item.text} readOnly />
+                    <button onClick={() => handleDeleteChecklistItem(index)}>
+                      Delete
+                    </button>
                   </div>
                 ))}
                 <div className="checklist-item">
@@ -214,49 +284,65 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
               </div>
             )}
 
-            {showAttachment && (
-              <div className="attachment">
-                <h3><FontAwesomeIcon icon={faPaperclip} /> Attach a file</h3>
+            <div className="attachment">
+              <h3>
+                  <FontAwesomeIcon icon={faPaperclip} /> Attach a file
+                </h3>
                 <input type="file" onChange={handleFileChange} multiple />
                 {attachments.map((file, index) => (
                   <div key={index} className="attachment-item">
                     <span>{file.name}</span>
                     <div className="attachment-actions">
-                      <button onClick={() => handleDownloadAttachment(file)}><FontAwesomeIcon icon={faDownload} /></button>
-                      <button onClick={() => handleDeleteAttachment(index)}><FontAwesomeIcon icon={faTrashAlt} /></button>
+                      <button onClick={() => handleDownloadAttachment(file)}>
+                        <FontAwesomeIcon icon={faDownload} />
+                      </button>
+                      <button onClick={() => handleDeleteAttachment(index)}>
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                      </button>
                     </div>
                   </div>
                 ))}
-              </div>
-            )}
+            </div>
 
-            <h3>Actions</h3>
-            <div className='sidebar-button'>
-              <a onClick={() => setShowMoveCard(true)}><FontAwesomeIcon icon={faTags} /> Move</a>
-              <a onClick={handleDeleteCard}><FontAwesomeIcon icon={faTrashAlt} /> Delete</a>
-              <a onClick={handleCopyCard}><FontAwesomeIcon icon={faCopy} /> Copy</a>
-              <a><FontAwesomeIcon icon={faPaperclip} /> Share</a>
+            <div className="actions">
+              <h3>Actions</h3>
+              <div className="sidebar-button">
+                <a onClick={() => setShowMoveCard(true)}>
+                  <FontAwesomeIcon icon={faEdit} /> Move
+                </a>
+                <a onClick={handleDeleteCard}>
+                  <FontAwesomeIcon icon={faTrashAlt} /> Delete
+                </a>
+                <a onClick={handleCopyCard}>
+                  <FontAwesomeIcon icon={faCopy} /> Copy
+                </a>
+                <a>
+                  <FontAwesomeIcon icon={faPaperclip} /> Share
+                </a>
+              </div>
             </div>
           </div>
+
+          {showMoveCard && (
+            <OutsideClickHandler onClose={() => setShowMoveCard(false)}>
+              <div className="move-card-popup">
+                <MoveCard
+                  card={card}
+                  lists={lists}
+                  onMove={(cardId, newListTitle, newPosition) => {
+                    onMove(cardId, newListTitle, newPosition);
+                    setShowMoveCard(false);
+                  }}
+                  onClose={() => setShowMoveCard(false)}
+                />
+              </div>
+            </OutsideClickHandler>
+          )}
         </div>
-        {showMoveCard && (
-          <OutsideClickHandler onClose={() => setShowMoveCard(false)}>
-            <div className="move-card-popup">
-              <MoveCard
-                card={card}
-                lists={lists}
-                onMove={(cardId, newListTitle, newPosition) => {
-                  onMove(cardId, newListTitle, newPosition);
-                  setShowMoveCard(false);
-                }}
-                onClose={() => setShowMoveCard(false)}
-              />
-            </div>
-          </OutsideClickHandler>
-        )}
       </OutsideClickHandler>
     </div>
   );
 };
 
 export default CardDetail;
+

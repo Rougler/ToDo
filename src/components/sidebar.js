@@ -17,22 +17,26 @@ const Sidebar = ({ children }) => {
 
   return (
     <>
-    <div className={`sidebar-left ${isOpen ? 'open' : 'closed'}`} onClick={openSidebar}>
-      <button className="toggle-button" onClick={toggleSidebar}>
-        {isOpen ? 'Close' : '>'}
-      </button>
-      <ul>
-        <li className="sidebar-item">
-          <div className="icon">🏠</div>
-          {isOpen && <span><Link to="/" style={{"cursor":"pointer","text-decoration": "none"}}>Task Pool</Link></span>}
-        </li>
-        <li className="sidebar-item">
-          <div className="icon">📊</div>
-          {isOpen && <span><Link to="/dashboard" style={{"cursor":"pointer","text-decoration": "none"}}>Your Boards</Link></span>}
-        </li>
-      </ul>
-    </div>
-    <main>{children}</main>
+      <div className={`sidebar-left ${isOpen ? 'open' : 'closed'}`} onClick={openSidebar}>
+        <button className="toggle-button" onClick={toggleSidebar}>
+          {isOpen ? 'Close' : '>'}
+        </button>
+        <ul>
+          <Link to="/" style={{ "cursor": "pointer", "text-decoration": "none" }}>
+            <li className="sidebar-item">
+              <div className="icon">🏠</div>
+              {isOpen && <span>Task Pool</span>}
+            </li>
+          </Link>
+          <Link to="/dashboard" style={{ "cursor": "pointer", "text-decoration": "none" }}>
+            <li className="sidebar-item">
+              <div className="icon">📊</div>
+              {isOpen && <span>Your Boards</span>}
+            </li>
+          </Link>
+        </ul>
+      </div>
+      <main>{children}</main>
     </>
   );
 };
