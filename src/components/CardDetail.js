@@ -11,7 +11,6 @@ import {
   faUser, faTags, faTrashAlt, faList, faAlignLeft, faComments, faEdit, faDownload, faCopy
 } from '@fortawesome/free-solid-svg-icons';
 import DateRangePicker from './date-modal';
-
 const CardDetail = ({
   card,
   lists,
@@ -138,7 +137,6 @@ const CardDetail = ({
     onSaveCoverColor(card.id, color);
     setShowCoverOptions(false);
   };
-
   const handleDeleteAttachment = (index) => {
     setAttachments(attachments.filter((_, i) => i !== index));
   };
@@ -221,17 +219,20 @@ const CardDetail = ({
             <h3>Add to card</h3>
             <div className="sidebar-button">
               <a onClick={toggleChecklist}>
-                <FontAwesomeIcon icon={faCheckSquare} /> Checklist
+                <FontAwesomeIcon icon={faEdit} /> Checklist
               </a>
               <a onClick={toggleDatePicker}>
-                <FontAwesomeIcon icon={faClock} /> Dates
+                <FontAwesomeIcon icon={faEdit} /> Dates
               </a>
               {showDatePicker && (
                 <div className="date-picker-popup">
                   <ResponsiveDateRangePickers />
                 </div>
               )}
+              <a onClick={toggleAttachment}><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
               
+              
+              <a><FontAwesomeIcon icon={faTags} /> Custom Fields</a>
               <a onClick={() => setShowCoverOptions(!showCoverOptions)}><FontAwesomeIcon icon={faImage} /> Cover</a>
               {showCoverOptions && (
                 <div className="cover-options">
@@ -247,29 +248,8 @@ const CardDetail = ({
                   </div>
                 </div>
               )}
-              <a onClick={toggleAttachment}><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
-              {showAttachment && (
-                <div className="attachment">
-                  <h3>
-                    <FontAwesomeIcon icon={faPaperclip} /> Attach a file
-                  </h3>
-                  <input type="file" onChange={handleFileChange} multiple />
-                  {attachments.map((file, index) => (
-                    <div key={index} className="attachment-item">
-                      <span>{file.name}</span>
-                      <div className="attachment-actions">
-                        <button onClick={() => handleDownloadAttachment(file)}>
-                          <FontAwesomeIcon icon={faDownload} />
-                        </button>
-                        <button onClick={() => handleDeleteAttachment(index)}>
-                          <FontAwesomeIcon icon={faTrashAlt} />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
+
             {showChecklist && (
               <div className="checklist">
                 <h3>Checklist</h3>
@@ -303,11 +283,31 @@ const CardDetail = ({
               </div>
             )}
 
+            <div className="attachment">
+              <h3>
+                  <FontAwesomeIcon icon={faPaperclip} /> Attach a file
+                </h3>
+                <input type="file" onChange={handleFileChange} multiple />
+                {attachments.map((file, index) => (
+                  <div key={index} className="attachment-item">
+                    <span>{file.name}</span>
+                    <div className="attachment-actions">
+                      <button onClick={() => handleDownloadAttachment(file)}>
+                        <FontAwesomeIcon icon={faDownload} />
+                      </button>
+                      <button onClick={() => handleDeleteAttachment(index)}>
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+            </div>
+
             <div className="actions">
               <h3>Actions</h3>
               <div className="sidebar-button">
                 <a onClick={() => setShowMoveCard(true)}>
-                  <FontAwesomeIcon icon={faList} /> Move
+                  <FontAwesomeIcon icon={faEdit} /> Move
                 </a>
                 <a onClick={handleDeleteCard}>
                   <FontAwesomeIcon icon={faTrashAlt} /> Delete
@@ -344,3 +344,4 @@ const CardDetail = ({
 };
 
 export default CardDetail;
+
