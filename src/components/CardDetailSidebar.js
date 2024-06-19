@@ -22,6 +22,8 @@ const CardDetailSidebar = () => {
         <button>Make template</button>
         <button>Archive</button>
         <button>Share</button>
+
+        <button>Delete</button>
       </div>
     </div>
   );

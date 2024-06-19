@@ -9,4 +9,12 @@ const Card = ({ text }) => {
   );
 };
 
+const deleteCard = ({ text }) => {
+  return (
+    <div className="deletecard">
+      {text}
+    </div>
+  );
+};
+
 export default Card;
