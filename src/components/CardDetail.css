@@ -176,7 +176,7 @@ button[type="button"] {
 }
 
 .description textarea {
-  width: 500%;
+  width: 100%;
   height: 5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -390,7 +390,7 @@ button[type="button"] {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  width: 100%;
+  width: 600px;
   max-height: 90%;
   overflow-y: auto;
 }
@@ -546,4 +546,27 @@ button[type="button"] {
 .description .cancel-button:hover {
   background-color: #c9302c; /* Darker red color on hover */
 }
+
+
+.tag-list button{
+  background-color: #0079bf;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 3px;
+  /* margin-bottom: 10px; */
+  cursor: pointer;
+  font-size: 11px;
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+.tag-list input{
+  padding: 7px;
+    border: none;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+
 

@@ -3,7 +3,7 @@ import { PieChart } from '@mui/x-charts/PieChart';
 
 const StraightAnglePieChart = ({ data }) => {
   const chartData = [
-    { label: 'On-going', value: data['On-going'] }, //, color: 'green'
+    { label: 'On-going', value: data['On-going'], color: 'green' }, //
     { label: 'Completed', value: data['Completed'] }, //, color: 'green'
   ];
 

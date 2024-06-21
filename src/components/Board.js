@@ -1,14 +1,18 @@
+// Board.js
+
 import React, { useState } from 'react';
 import './Board.css';
 import AddListForm from './AddListForm';
 import DeleteColumn from './DeleteColumn';
 import CardDetail from './CardDetail';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTags } from '@fortawesome/free-solid-svg-icons'; // Import the faTags icon
 
 const initialData = [
-  { id: 1, title: 'Project planning', listTitle: 'To do', coverColor: '' },
-  { id: 2, title: 'Kickoff meeting', listTitle: 'To do', coverColor: '' },
-  { id: 3, title: 'sdfsdf', listTitle: 'In Progress', coverColor: '' },
-  { id: 4, title: 'fsdf', listTitle: 'In Progress', coverColor: '' },
+  { id: 1, title: 'Project planning', listTitle: 'To do', coverColor: '', tags: [] },
+  { id: 2, title: 'Kickoff meeting', listTitle: 'To do', coverColor: '', tags: [] },
+  { id: 3, title: 'sdfsdf', listTitle: 'In Progress', coverColor: '', tags: [] },
+  { id: 4, title: 'fsdf', listTitle: 'In Progress', coverColor: '', tags: [] },
 ];
 
 const initialLists = ['To do', 'In Progress', 'Done', 'Staging'];
@@ -27,6 +31,8 @@ const Board = () => {
       id: cards.length + 1,
       title: newCardTitle,
       listTitle: listTitle,
+      coverColor: '',
+      tags: []
     };
 
     setCards([...cards, newCard]);
@@ -60,6 +66,13 @@ const Board = () => {
     setCards(updatedCards);
   };
 
+  const saveTags = (cardId, newTags) => {
+    const updatedCards = cards.map((card) =>
+      card.id === cardId ? { ...card, tags: newTags } : card
+    );
+    setCards(updatedCards);
+  };
+
   const addList = (listTitle) => {
     if (listTitle.trim() === '') return;
     setLists([...lists, listTitle]);
@@ -86,8 +99,12 @@ const Board = () => {
     saveCoverColor(cardId, newColor);
   };
 
+  const handleSaveTags = (cardId, newTags) => {
+    saveTags(cardId, newTags);
+  };
+
   const handleCopyCard = (card) => {
-    const newCard = { ...card, id: cards.length + 1, title: `${card.title} (Copy)` };
+    const newCard = { ...card, id: cards.length + 1, title: `${card.title} (Copy)`, tags: [] };
     const index = cards.findIndex(c => c.id === card.id);
     const updatedCards = [
       ...cards.slice(0, index + 1),
@@ -114,6 +131,14 @@ const Board = () => {
                 style={{ backgroundColor: card.coverColor }}
               >
                 {card.title}
+                <div className="tags">
+                  {card.tags.map((tag, index) => (
+                    <div key={index} className="tag-item">
+                      <FontAwesomeIcon icon={faTags} className="tag-icon" />
+                      <span className="tag">{tag}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
@@ -155,6 +180,7 @@ const Board = () => {
           onSaveTitle={handleSaveTitle}
           onSaveCoverColor={handleSaveCoverColor}
           onCopyCard={handleCopyCard}
+          onSaveTags={handleSaveTags}
         />
       )}
     </div>

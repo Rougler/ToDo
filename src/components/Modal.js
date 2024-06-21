@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Select from "react-select";
 import "./Modal.css";
 import { colors } from "@mui/material";
@@ -7,6 +7,7 @@ const Modal = ({ showModal, handleClose, addTask }) => {
   const [taskName, setTaskName] = useState("");
   const [taskStatus, setTaskStatus] = useState("On-going");
   const [assignedTo, setAssignedTo] = useState([]);
+  const modalRef = useRef(null);
 
   const options = [
     { value: "John", label: "John" },
@@ -14,10 +15,28 @@ const Modal = ({ showModal, handleClose, addTask }) => {
     { value: "Bob", label: "Bob" },
   ];
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        handleClose();
+      }
+    };
+
+    if (showModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showModal, handleClose]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Convert assignedTo to an array of names
-    const assignedToNames = assignedTo.map(person => person.label);
+    const assignedToNames = assignedTo.map((person) => person.label);
     addTask({ taskName, taskStatus, assignedTo: assignedToNames });
     handleClose();
   };
@@ -28,7 +47,7 @@ const Modal = ({ showModal, handleClose, addTask }) => {
 
   return (
     <div className="modal-overlay-card">
-      <div className="modal-card">
+      <div className="modal-card" ref={modalRef}>
         <h2>Add New Task</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -60,7 +79,7 @@ const Modal = ({ showModal, handleClose, addTask }) => {
             />
           </div>
           <button type="submit">Add Task</button>
-          <button type="button" onClick={handleClose} >
+          <button type="button" className="cancel" onClick={handleClose}>
             Cancel
           </button>
         </form>

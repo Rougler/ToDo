@@ -1,5 +1,6 @@
 .delete-column {
-  display: flex;
+  display: inline-block;
+  float: left;
 }
 
 .delete-confirmation-overlay {
