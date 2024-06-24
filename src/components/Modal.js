@@ -72,7 +72,7 @@ const Modal = ({ showModal, handleClose, addTask }) => {
           <div className="form-group">
             <label>Assigned To:</label>
             <Select
-              isMulti
+        isMulti
               options={options}
               value={assignedTo}
               onChange={setAssignedTo}

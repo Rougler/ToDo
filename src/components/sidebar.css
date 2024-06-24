@@ -46,6 +46,7 @@
   
   .icon {
     margin-right: 10px;
+    color: #0079bf;
   }
   
   .badge {
@@ -55,4 +56,7 @@
     border-radius: 12px;
     font-size: 12px;
     margin-left: 5px;
+  }
+  .icon-tag{
+    color: #0079bf;
   }

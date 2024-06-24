@@ -44,8 +44,8 @@ button[type="button"] {
   word-wrap: break-word;
   white-space: normal;
   clear: both;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 700;
   color: #006eae;
   align-items: center;
   gap: 10px;
@@ -315,7 +315,7 @@ button[type="button"] {
   align-items: center;
   padding: 10px;
   text-decoration: none;
-  color: #0079bf;
+  color: #707070;
   background-color: #f4f5f7;
   border-radius: 3px;
   margin-bottom: 8px;
@@ -368,7 +368,13 @@ button[type="button"] {
   display: flex;
   align-items: center;
   gap: 10px;
+  font-size: 15px;
+    font-weight: 500;
 
+}
+
+.description h3 svg{
+  font-size: 12px;
 }
 
 
@@ -424,6 +430,9 @@ button[type="button"] {
 
 .sidebar h3 {
   margin: 18px 0px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0079bf;
 }
 
 
@@ -546,27 +555,4 @@ button[type="button"] {
 .description .cancel-button:hover {
   background-color: #c9302c; /* Darker red color on hover */
 }
-
-
-.tag-list button{
-  background-color: #0079bf;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 3px;
-  /* margin-bottom: 10px; */
-  cursor: pointer;
-  font-size: 11px;
-  margin-left: 10px;
-  font-weight: 500;
-}
-
-.tag-list input{
-  padding: 7px;
-    border: none;
-    background-color: #f1f1f1;
-    border-radius: 4px;
-}
-
-
 
