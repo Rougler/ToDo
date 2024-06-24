@@ -21,7 +21,11 @@ const DeleteColumn = ({ listTitle, onDelete }) => {
           </div>
         </div>
       )}
-      <button className='closer' onClick={() => setIsConfirming(true)}>X</button>
+      <button className='closer' onClick={() => setIsConfirming(true)}>
+        <span class="X"></span>
+        <span class="Y"></span>
+        <div class="close">Close</div>
+      </button>
     </div>
   );
 };

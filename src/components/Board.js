@@ -5,10 +5,10 @@ import DeleteColumn from './DeleteColumn';
 import CardDetail from './CardDetail';
 
 const initialData = [
-  { id: 1, title: 'Project planning', listTitle: 'To do', coverColor: '' },
-  { id: 2, title: 'Kickoff meeting', listTitle: 'To do', coverColor: '' },
-  { id: 3, title: 'sdfsdf', listTitle: 'In Progress', coverColor: '' },
-  { id: 4, title: 'fsdf', listTitle: 'In Progress', coverColor: '' },
+  { id: 1, title: 'Project planning', listTitle: 'To do', coverColor: '', checked: false },
+  { id: 2, title: 'Kickoff meeting', listTitle: 'To do', coverColor: '', checked: false },
+  { id: 3, title: 'sdfsdf', listTitle: 'In Progress', coverColor: '', checked: false },
+  { id: 4, title: 'fsdf', listTitle: 'In Progress', coverColor: '', checked: false },
 ];
 
 const initialLists = ['To do', 'In Progress', 'Done', 'Staging'];
@@ -27,6 +27,8 @@ const Board = () => {
       id: cards.length + 1,
       title: newCardTitle,
       listTitle: listTitle,
+      coverColor: '',
+      checked: false,
     };
 
     setCards([...cards, newCard]);
@@ -97,13 +99,20 @@ const Board = () => {
     setCards(updatedCards);
   };
 
+  const handleCheckboxToggle = (cardId) => {
+    const updatedCards = cards.map((card) =>
+      card.id === cardId ? { ...card, checked: !card.checked } : card
+    );
+    setCards(updatedCards);
+  };
+
   return (
     <div className="board">
       {lists.map((listTitle, index) => (
         <div key={index} className="list">
           <div className="list-header">
-            <DeleteColumn listTitle={listTitle} onDelete={deleteList} />
             <h3>{listTitle}</h3>
+            <DeleteColumn listTitle={listTitle} onDelete={deleteList} />
           </div>
           <div className="cards">
             {cards.filter((card) => card.listTitle === listTitle).map((card) => (
@@ -113,7 +122,32 @@ const Board = () => {
                 onClick={() => setSelectedCard(card)}
                 style={{ backgroundColor: card.coverColor }}
               >
-                {card.title}
+                <div className="checkbox-wrapper-12">
+                  <div className="cbx">
+                    <input
+                      type="checkbox"
+                      id={`cbx-${card.id}`}
+                      checked={card.checked}
+                      onChange={() => handleCheckboxToggle(card.id)}
+                    />
+                    <label htmlFor={`cbx-${card.id}`}></label>
+                    <svg fill="none" viewBox="0 0 15 14" height="14" width="15">
+                      <path d="M2 8.36364L6.23077 12L13 2"></path>
+                    </svg>
+                  </div>
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <filter id="goo-12">
+                        <feGaussianBlur result="blur" stdDeviation="4" in="SourceGraphic"></feGaussianBlur>
+                        <feColorMatrix result="goo-12" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" mode="matrix" in="blur"></feColorMatrix>
+                        <feBlend in2="goo-12" in="SourceGraphic"></feBlend>
+                      </filter>
+                    </defs>
+                  </svg>
+                </div>
+                <span onClick={() => setSelectedCard(card)}>
+                  {card.title}
+                </span>
               </div>
             ))}
           </div>
@@ -138,7 +172,7 @@ const Board = () => {
                   : setSelectedList(listTitle)
               }
             >
-              + Add a card
+              + Add Task
             </button>
           </div>
         </div>

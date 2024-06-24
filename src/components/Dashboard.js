@@ -58,7 +58,11 @@ const Dashboard = () => {
         </div>
         <div className="task-section">
           <div className="add-task">
-            <button className="add-task-button" onClick={handleShowModal}>+</button>
+            <button className="add-task-button" onClick={handleShowModal}>
+              <span class="A"></span>
+              <span class="B"></span>
+              <div class="add">ADD</div>
+            </button>
             <span className="text">Add Task</span>
           </div>
           <table className="task-table">

@@ -1,10 +1,11 @@
+// CardDetail.js
 import React, { useState } from 'react';
 import './CardDetail.css';
 import OutsideClickHandler from './OutsideClickHandler';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faEye, faCheckSquare, faClock, faPaperclip, faMapMarkerAlt, faImage,
-  faUser, faTags, faTrashAlt, faList, faAlignLeft, faComments, faEdit, faDownload, faCopy
+  faCheckSquare, faClock, faPaperclip, faImage,
+  faTags, faTrashAlt, faAlignLeft, faEdit, faDownload, faCopy
 } from '@fortawesome/free-solid-svg-icons';
 import MoveCard from './MoveCard';
 import DateRangePicker from './date-modal';
@@ -14,9 +15,8 @@ const colors = [
   'rgb(111 202 255)', '#00c2e0', '#51e898', '#ff78cb',
 ];
 
-const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSaveCoverColor, onCopyCard }) => {
+const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSaveCoverColor, onCopyCard, onSaveTags }) => {
   const [description, setDescription] = useState('');
-  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [showMoveCard, setShowMoveCard] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -28,10 +28,12 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
   const [title, setTitle] = useState(card.title);
   const [showCoverOptions, setShowCoverOptions] = useState(false);
   const [attachments, setAttachments] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [newTag, setNewTag] = useState('');
+  const [showTagInput, setShowTagInput] = useState(false);
 
   const handleAddComment = () => {
     if (newComment.trim()) {
-      setComments([...comments, newComment]);
       setNewComment('');
     }
   };
@@ -109,6 +111,15 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
     onClose();
   };
 
+  const handleAddTag = () => {
+    if (newTag.trim()) {
+      setTags([...tags, newTag]);
+      setNewTag('');
+      setShowTagInput(false);
+      onSaveTags(card.id, [...tags, newTag]);
+    }
+  };
+
   return (
     <div className="modal-one">
       <OutsideClickHandler onClose={onClose}>
@@ -159,10 +170,8 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
                 </div>
               )}
               <a onClick={toggleAttachment}><FontAwesomeIcon icon={faPaperclip} /> Attachment</a>
-              <a onClick={handleCopyCard}><FontAwesomeIcon icon={faCopy} /> Copy</a>
-              
-              <a><FontAwesomeIcon icon={faTags} /> Custom Fields</a>
               <a onClick={() => setShowCoverOptions(!showCoverOptions)}><FontAwesomeIcon icon={faImage} /> Cover</a>
+              <a onClick={() => setShowTagInput(!showTagInput)}><FontAwesomeIcon icon={faTags} /> Tag</a>
               {showCoverOptions && (
                 <div className="cover-options">
                   <div className="cover-colors">
@@ -178,6 +187,29 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
                 </div>
               )}
             </div>
+
+            {showTagInput && (
+              <div className="tags">
+                <h3><FontAwesomeIcon icon={faTags} /> Tags</h3>
+                <div className="tag-list">
+                  {tags.map((tag, index) => (
+                    <span key={index} className="tag">{tag}</span>
+                  ))}
+                  <input
+                    type="text"
+                    placeholder="Add a tag"
+                    value={newTag}
+                    onChange={(e) => setNewTag(e.target.value)}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        handleAddTag();
+                      }
+                    }}
+                  />
+                  <button onClick={handleAddTag}>Add +</button>
+                </div>
+              </div>
+            )}
 
             {showChecklist && (
               <div className="checklist">
@@ -234,7 +266,9 @@ const CardDetail = ({ card, lists, onMove, onClose, onSaveTitle, onDelete, onSav
             <div className='sidebar-button'>
               <a onClick={() => setShowMoveCard(true)}><FontAwesomeIcon icon={faTags} /> Move</a>
               <a onClick={handleDeleteCard}><FontAwesomeIcon icon={faTrashAlt} /> Delete</a>
-              <a onClick={handleCopyCard}><FontAwesomeIcon icon={faCopy} /> Copy</a>
+              <a onClick={handleCopyCard}><FontAwesomeIcon icon={faCopy} /> Copy
+                {/* Copy */}
+              </a>
               <a><FontAwesomeIcon icon={faPaperclip} /> Share</a>
             </div>
           </div>
